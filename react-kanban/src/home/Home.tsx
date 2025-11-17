@@ -1,12 +1,22 @@
+import { Outlet, useLocation } from "react-router-dom";
+import { Navbar } from "./NavBar";
+import { APP_ROUTES } from "../routes";
+import { Start } from "./Start";
 
+export function Home() {
 
-export function Home(){
+  const location = useLocation();
 
+  return (
+    <>
 
-    return(
-        <>
-          <div> hola </div>
-        </>
-    )
-
+      <Navbar />
+      
+      <div>
+        {location.pathname === APP_ROUTES.HOME ? 
+        <Start /> : <Outlet />
+        }
+        </div>
+    </>
+  );
 }

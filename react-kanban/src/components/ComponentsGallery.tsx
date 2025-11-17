@@ -1,11 +1,15 @@
 
 
+
 export function ComponentsGallery(){
 
 
     return(
         <>
-          <div> Componentes </div>
+          <div className="mt-20"
+          > 
+         <p> Componentes </p>
+          </div>
         </>
     )
 
