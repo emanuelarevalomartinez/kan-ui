@@ -35,7 +35,7 @@ Asegúrate de tener instalado:
 
 ---
 
-## 📦 Instalación
+## 📥 Instalación
 
 Clona el repositorio:
 
@@ -46,7 +46,7 @@ cd Taskflow-Api/flask-api
 
 ---
 
-## 📦 Crea y activa el entorno virtual:
+## 🧱 Crea y activa el entorno virtual:
 
 ```bash
 python3 -m venv venv
@@ -65,14 +65,24 @@ pip install -r requirements.txt
 
 ---
 
-## 📦 Ejecutar la aplicación:
+## ▶️ Ejecutar la aplicación:
 
 ```bash
 python run.py
 ```
 
-La API estará disponible en:
+### La API estará disponible en:
 
 ```bash
 http://127.0.0.1:5000/
 ```
+
+## 🛠 Tecnologías utilizadas
+
+#### Flask 🔥
+
+#### LibreTranslate 🌍
+
+#### Python 🐍
+
+#### REST API
