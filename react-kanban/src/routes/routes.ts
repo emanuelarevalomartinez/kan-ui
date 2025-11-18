@@ -4,6 +4,8 @@
     export const APP_ROUTES = {
         HOME: "/",
         COMPONENTS: "/components-gallery",
+        REQUIREMENTS: "/components-gallery/requirements",
+        KANBANBOARD: "/components-gallery/kanbanBoard",
         DEMO: "/demo",
     } as const;
     

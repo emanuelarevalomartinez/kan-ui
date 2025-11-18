@@ -24,7 +24,7 @@ export function Navbar() {
     <nav className="fixed top-0 w-full bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center h-16 px-6">
         <h1
-          className="text-2xl font-bold text-blue-600 cursor-pointer"
+          className="text-2xl font-bold text-indigo-600 cursor-pointer"
           onClick={HandleNavigateToHome}
         >
           Kan-UI
