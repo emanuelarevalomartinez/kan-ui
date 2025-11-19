@@ -24,38 +24,19 @@ export function Test(){
 
    return (
     <>
-      <div className="mt-16">
-
-       {/*   <DndContext onDragEnd={handleDragEnd}>
-
-      {!droppedZone ? draggableMarkup : null}
-
-      <div className="flex gap-20 mt-20">
-          <Droppable id="box-1">
-            {droppedZone === "box-1" ? draggableMarkup : "Drop here 1"}
-          </Droppable>
-
-          <Droppable id="box-2">
-            {droppedZone === "box-2" ? draggableMarkup : "Drop here 2"}
-          </Droppable>
-
-          <Droppable id="box-3">
-            {droppedZone === "box-3" ? draggableMarkup : "Drop here 3"}
-          </Droppable>
-        </div>
-    </DndContext> */}
+      <div className="mt-4 w-full pb-4">
 
      <BoardContainer title="Mi Tablero Kanban">
-      <ColumnSection name="Por hacer" colorClass="bg-white">
+      <ColumnSection name="Por hacer">
         <CardItem title="Tarea 1" description="Descripción de la tarea 1" />
         <CardItem title="Tarea 2" />
       </ColumnSection>
 
-      <ColumnSection name="En progreso" colorClass="bg-white">
+      <ColumnSection name="En progreso">
         <CardItem title="Tarea 3" description="Ya iniciada" />
       </ColumnSection>
 
-      <ColumnSection name="Hecho" colorClass="bg-white">
+      <ColumnSection name="Hecho">
         <CardItem title="Tarea 4" description="Finalizada" />
       </ColumnSection>
     </BoardContainer>
