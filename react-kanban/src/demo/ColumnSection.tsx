@@ -31,7 +31,7 @@ export function ColumnSection({ children, name }: ColumnSectionProps) {
           >
            <ItemCard/>
           </Modal>
-          <div className={`bg-[#F6F8FA] flex flex-col w-full p-4 rounded-2xl`}>
+          <div className={`bg-gray-300 flex flex-col w-full p-4 rounded-2xl shadow-inner`}>
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold mb-2">{name}</h2>
         <div className="flex space-x-2">

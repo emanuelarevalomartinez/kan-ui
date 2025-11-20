@@ -25,7 +25,7 @@ export function ModalDelete({
       ></div>
 
       <div
-        className={`bg-white rounded-2xl shadow-xl w-full max-w-md transform transition-all duration-300
+        className={`bg-white rounded-2xl shadow-xl w-full max-w-sm transform transition-all duration-300
         ${isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
       >
         <div className="flex items-center justify-center border-b p-4">
