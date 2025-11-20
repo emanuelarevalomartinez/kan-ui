@@ -1,24 +1,37 @@
 import { TbNewSection } from "react-icons/tb";
 import { Modal } from "./components/Modal";
-import { useState } from "react";
 import { ItemColumn } from "./components/ItemColumn";
+import { useAppContext } from "../context";
 interface BoardContainerProps {
   title: string;
   children: React.ReactNode;
 }
 
 export function BoardContainer({ children, title }: BoardContainerProps) {
-  const [open, setOpen] = useState(false);
+  const { newColumn, setNewColumn, handleAddNewColumn, openModalBoardContainer, setOpenModalBoardContainer } = useAppContext();
 
   function handleAddNewSection() {
     console.log("Add a new Section");
-    setOpen(true);
+    setOpenModalBoardContainer(true);
+  }
+
+  function handleCloseColumnModal() {
+    setOpenModalBoardContainer(false);
+    setNewColumn({ name: "", cards: [] });
   }
 
   return (
     <>
-      <Modal isOpen={open} onClose={() => setOpen(false)} title="Nuevo Item">
-        <ItemColumn />
+      <Modal
+        isOpen={openModalBoardContainer}
+        onClose={() => handleCloseColumnModal()}
+        title="Nuevo Item"
+      >
+        <ItemColumn
+          newColumnName={newColumn.name}
+          setNewColumn={setNewColumn}
+          handleAddNewColumn={handleAddNewColumn}
+        />
       </Modal>
 
       <div className=" bg-white p-6 rounded-2xl text-black w-full ">
