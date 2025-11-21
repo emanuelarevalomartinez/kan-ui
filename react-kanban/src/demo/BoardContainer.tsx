@@ -8,6 +8,7 @@ import {
   type DragEndEvent,
 } from "@dnd-kit/core";
 import { useState } from "react";
+import { ItemTrash } from "./components/ItemTrash";
 interface BoardContainerProps {
   title: string;
   children: React.ReactNode;
@@ -21,6 +22,7 @@ export function BoardContainer({ children, title }: BoardContainerProps) {
     handleAddNewColumn,
     openModalBoardContainer,
     setOpenModalBoardContainer,
+    handleDeleteCard,
     columns,
   } = useAppContext();
 
@@ -34,63 +36,96 @@ export function BoardContainer({ children, title }: BoardContainerProps) {
   }
 
   const [activeId, setActiveId] = useState<string | null>(null);
+   const [isDragging, setIsDragging] = useState(false);
 
   function handleDragStart(event: any) {
     setActiveId(event.active.id);
+     setIsDragging(true);
   }
 
-  function handleDragEnd(event: DragEndEvent) {
+    function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
-    if (!over) {
-      setActiveId(null);
-      return;
+    if (over?.id === 'trash-bin') {
+      const activeId = active.id as string;
+      const activeParts = activeId.split("-");
+      
+      if (activeParts[0] === "card" && activeParts.length === 3) {
+        const columnIndex = parseInt(activeParts[1]);
+        const cardIndex = parseInt(activeParts[2]);
+        
+        if (columnIndex >= 0 && columnIndex < columns.length && 
+            cardIndex >= 0 && cardIndex < columns[columnIndex].cards.length) {
+          handleDeleteCard(columnIndex, cardIndex);
+        }
+      }
     }
+    else if (over) {
+      const activeId = active.id as string;
+      const overId = over.id as string;
 
-    const activeId = active.id as string;
-    const overId = over.id as string;
-
-    if (activeId === overId) {
-      setActiveId(null);
-      return;
-    }
-
-    const activeParts = activeId.split("-");
-    const overParts = overId.split("-");
-
-    setColumns((prevColumns: Column[]) => {
-      const newColumns: Column[] = prevColumns.map((column) => ({
-        ...column,
-        cards: [...column.cards],
-      }));
-
-      const fromColumnIndex = parseInt(activeParts[1]);
-      const fromCardIndex = parseInt(activeParts[2]);
-
-      if (activeParts[0] === "card" && overParts[0] === "card") {
-        const toColumnIndex = parseInt(overParts[1]);
-        const toCardIndex = parseInt(overParts[2]);
-
-        const movedCard = newColumns[fromColumnIndex].cards[fromCardIndex];
-
-        newColumns[fromColumnIndex].cards.splice(fromCardIndex, 1);
-
-        newColumns[toColumnIndex].cards.splice(toCardIndex, 0, movedCard);
+      if (activeId === overId) {
+        setActiveId(null);
+        setIsDragging(false);
+        return;
       }
 
-      else if (activeParts[0] === "card" && overParts[0] === "column") {
-        const toColumnIndex = parseInt(overParts[1]);
+      const activeParts = activeId.split("-");
+      const overParts = overId.split("-");
 
-        const movedCard = newColumns[fromColumnIndex].cards[fromCardIndex];
-
-        newColumns[fromColumnIndex].cards.splice(fromCardIndex, 1);
-
-        newColumns[toColumnIndex].cards.push(movedCard);
+      if (activeParts[0] !== "card" || activeParts.length !== 3) {
+        setActiveId(null);
+        setIsDragging(false);
+        return;
       }
 
-      return newColumns;
-    });
+      setColumns((prevColumns: Column[]) => {
+        const newColumns: Column[] = prevColumns.map((column) => ({
+          ...column,
+          cards: [...column.cards],
+        }));
+
+        const fromColumnIndex = parseInt(activeParts[1]);
+        const fromCardIndex = parseInt(activeParts[2]);
+
+        if (fromColumnIndex >= newColumns.length || 
+            fromCardIndex >= newColumns[fromColumnIndex].cards.length) {
+          return prevColumns;
+        }
+
+        if (overParts[0] === "card" && overParts.length === 3) {
+          const toColumnIndex = parseInt(overParts[1]);
+          const toCardIndex = parseInt(overParts[2]);
+
+          if (toColumnIndex < newColumns.length && 
+              toCardIndex <= newColumns[toColumnIndex].cards.length) {
+            const movedCard = newColumns[fromColumnIndex].cards[fromCardIndex];
+            newColumns[fromColumnIndex].cards.splice(fromCardIndex, 1);
+            newColumns[toColumnIndex].cards.splice(toCardIndex, 0, movedCard);
+          }
+        }
+
+        else if (overParts[0] === "column" && overParts.length === 2) {
+          const toColumnIndex = parseInt(overParts[1]);
+
+          if (toColumnIndex < newColumns.length) {
+            const movedCard = newColumns[fromColumnIndex].cards[fromCardIndex];
+            newColumns[fromColumnIndex].cards.splice(fromCardIndex, 1);
+            newColumns[toColumnIndex].cards.push(movedCard);
+          }
+        }
+
+        return newColumns;
+      });
+    }
+
     setActiveId(null);
+    setIsDragging(false);
+  }
+
+  function handleDragCancel() {
+    setActiveId(null);
+    setIsDragging(false);
   }
 
   const activeCard = (() => {
@@ -126,7 +161,11 @@ export function BoardContainer({ children, title }: BoardContainerProps) {
         />
       </Modal>
 
-      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <DndContext 
+      onDragStart={handleDragStart} 
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+      >
         <div className=" bg-white p-6 rounded-2xl text-black w-full ">
           <div className="flex justify-between items-center px-2">
             <h1 className="text-2xl font-bold mb-4">{title}</h1>
@@ -146,6 +185,8 @@ export function BoardContainer({ children, title }: BoardContainerProps) {
             </div>
           </div>
         </div>
+
+         <ItemTrash isDragging={isDragging} />
 
         <DragOverlay>
           {activeCard ? (
