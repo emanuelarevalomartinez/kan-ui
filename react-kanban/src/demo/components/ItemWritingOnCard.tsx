@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 
 interface ItemWritingOnCardprops {
-  description: string;
+  tempDescription: string;
+  setTempDescription: (e: string) => void;
 }
 
-export function ItemWritingOnCard({ description }: ItemWritingOnCardprops) {
+export function ItemWritingOnCard({ tempDescription, setTempDescription }: ItemWritingOnCardprops) {
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -28,7 +29,8 @@ export function ItemWritingOnCard({ description }: ItemWritingOnCardprops) {
   return (
     <textarea
       ref={textAreaRef}
-      defaultValue={description}
+      defaultValue={tempDescription}
+      onChange={(e) => setTempDescription(e.target.value)}
       onInput={adjustHeight}
       className="w-full bg-transparent border-none outline-none text-gray-700 text-sm resize-none overflow-hidden leading-5 "
       rows={1}

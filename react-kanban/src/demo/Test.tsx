@@ -1,22 +1,11 @@
 import { BoardContainer } from "./BoardContainer";
 import { ColumnSection } from "./ColumnSection";
 import { CardItem } from "./CardItem";
-import { useAppContext, type Column } from "../context";
+import { useAppContext } from "../context";
 
 
 
 export function Test() {
-  /*     const [droppedZone, setDroppedZone] = useState("box-1");
-
-  const draggableMarkup = (
-    <Draggable>Drag me</Draggable>
-  );
-
-     function handleDragEnd(event) {
-    if (event.over) {
-      setDroppedZone(event.over.id);
-    }
-} */
 
     const { columns } = useAppContext();
 
@@ -26,10 +15,12 @@ export function Test() {
 
         <BoardContainer title="Mi Tablero Kanban">
           {columns.map((column, columnIndex) => (
-            <ColumnSection key={columnIndex} name={column.name}>
+            <ColumnSection key={columnIndex} name={column.name} columnIndex={columnIndex}>
               {column.cards.map((card, cardIndex) => (
                 <CardItem
                   key={cardIndex}
+                  columnIndex={columnIndex}
+                  cardIndex={cardIndex}
                   title={card.title}
                   description={card.description}
                 />

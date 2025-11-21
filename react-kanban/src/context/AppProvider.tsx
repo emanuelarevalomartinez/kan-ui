@@ -10,6 +10,12 @@ type AppContextType = {
   handleAddNewColumn: (e: string) => void;
   openModalBoardContainer: boolean;
   setOpenModalBoardContainer: (e: boolean) => void;
+  handleAddNewCardOnColumn: ( e: number, f: Card) => void;
+  openModalColumnContainer: boolean,
+  setOpenModalColumnContainer: (e: boolean) => void;
+  handleDeleteCard: (e: number, f: number)=> void;
+  handleUpdateCardDescription: (e: number, f: number, g: string) => void;
+  handleDeleteColumn: ( e: number) => void;
 };
 
 export interface Column {
@@ -27,6 +33,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [currentLanguage, setCurrentLanguage] = useState("");
   const [openModalBoardContainer, setOpenModalBoardContainer] = useState(false);
+  const [openModalColumnContainer, setOpenModalColumnContainer] = useState(false);
 
   const [newColumn, setNewColumn] = useState<Column>({
     name: "",
@@ -65,6 +72,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    if (name.length > 20) {
+      alert("Nueva sección tener un nombre superior a 20 caractéres");
+      return;
+    }
+
     const exists = columns.some(
       (column) => column.name.trim().toLowerCase() === name.trim().toLowerCase()
     );
@@ -84,6 +96,53 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setOpenModalBoardContainer(false);
   }
 
+  function handleAddNewCardOnColumn(columnIndex: number, card: Card) {
+  setColumns((prev) =>
+    prev.map((col, index) =>
+      index === columnIndex
+        ? { ...col, cards: [...col.cards, card] }
+        : col
+    )
+  );
+}
+
+function handleDeleteCard(columnIndex: number, cardIndex: number) {
+  setColumns((prev) =>
+    prev.map((col, i) =>
+      i === columnIndex
+        ? { ...col, cards: col.cards.filter((_, j) => j !== cardIndex) }
+        : col
+    )
+  );
+}
+
+function handleUpdateCardDescription(
+  columnIndex: number,
+  cardIndex: number,
+  description: string
+) {
+  setColumns((prev) =>
+    prev.map((col, i) =>
+      i === columnIndex
+        ? {
+            ...col,
+            cards: col.cards.map((card, j) =>
+              j === cardIndex ? { ...card, description } : card
+            ),
+          }
+        : col
+    )
+  );
+}
+
+function handleDeleteColumn(columnIndex: number) {
+  setColumns((prevColumns) =>
+    prevColumns.filter((_, index) => index !== columnIndex)
+  );
+}
+
+
+
   return (
     <AppContext.Provider
       value={{
@@ -96,6 +155,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         handleAddNewColumn,
         openModalBoardContainer,
         setOpenModalBoardContainer,
+        handleAddNewCardOnColumn,
+        openModalColumnContainer,
+        setOpenModalColumnContainer,
+        handleDeleteCard,
+        handleUpdateCardDescription,
+        handleDeleteColumn,
       }}
     >
       {children}

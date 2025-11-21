@@ -11,11 +11,11 @@ export function BoardContainer({ children, title }: BoardContainerProps) {
   const { newColumn, setNewColumn, handleAddNewColumn, openModalBoardContainer, setOpenModalBoardContainer } = useAppContext();
 
   function handleAddNewSection() {
-    console.log("Add a new Section");
     setOpenModalBoardContainer(true);
   }
 
   function handleCloseColumnModal() {
+
     setOpenModalBoardContainer(false);
     setNewColumn({ name: "", cards: [] });
   }
@@ -25,7 +25,7 @@ export function BoardContainer({ children, title }: BoardContainerProps) {
       <Modal
         isOpen={openModalBoardContainer}
         onClose={() => handleCloseColumnModal()}
-        title="Nuevo Item"
+        title="Nueva Sección"
       >
         <ItemColumn
           newColumnName={newColumn.name}

@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RxTrash } from "react-icons/rx";
 import { Modal } from "./components/Modal";
 import { ModalDelete } from "./components/ModalDelete";
 import { ItemWritingOnCard } from "./components/ItemWritingOnCard";
+import { useAppContext } from "../context";
 
 interface CardItemProps {
   title: string;
   description?: string;
+  columnIndex: number;
+  cardIndex: number;
 }
 
-export function CardItem({ title, description }: CardItemProps) {
+export function CardItem({
+  title,
+  description,
+  columnIndex,
+  cardIndex,
+}: CardItemProps) {
+  const { handleDeleteCard, handleUpdateCardDescription } = useAppContext();
+
   const [open, setOpen] = useState(false);
   const [writing, setWriting] = useState(false);
+  const [tempDescription, setTempDescription] = useState(description ?? "");
 
   function HandleDeletecardItem() {
     console.log("Delete carditem");
+    handleDeleteCard(columnIndex, cardIndex);
     setOpen(false);
   }
 
@@ -23,6 +35,21 @@ export function CardItem({ title, description }: CardItemProps) {
     setOpen(true);
     setWriting(true);
   }
+
+  function handleModalClose() {
+    if (writing) {
+      handleUpdateCardDescription(columnIndex, cardIndex, tempDescription);
+    }
+
+    setWriting(false);
+    setOpen(false);
+  }
+
+  useEffect(() => {
+  if (open && writing) {
+    setTempDescription(description !== undefined ? description : "");
+  }
+}, [open, writing, description]);
 
   return (
     <>
@@ -35,12 +62,14 @@ export function CardItem({ title, description }: CardItemProps) {
       <Modal
         isOpen={open && writing}
         onClose={() => {
-          setOpen(false);
-          setWriting(false);
+          handleModalClose();
         }}
         title="Nota"
       >
-        <ItemWritingOnCard description={description !== undefined ? description : ""} />
+        <ItemWritingOnCard
+          tempDescription={tempDescription}
+          setTempDescription={setTempDescription}
+        />
       </Modal>
 
       <div className="relative bg-[#FEFEFE] p-4 rounded-2xl shadow hover:shadow-md transition-shadow">

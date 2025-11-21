@@ -16,7 +16,7 @@ export function ItemColumn( { newColumnName, setNewColumn, handleAddNewColumn }:
       className="space-y-3"
     >
       <label className="text-sm font-medium text-gray-700">
-        Nombre de la Sección
+        Nombre
       </label>
       <input
       value={newColumnName}
@@ -26,7 +26,7 @@ export function ItemColumn( { newColumnName, setNewColumn, handleAddNewColumn }:
             name: e.target.value
           }))
         }
-        placeholder="Nueva Sección"
+        placeholder="Nombre"
         className="w-full border border-indigo-300 rounded-lg p-2 text-gray-800 focus:outline-none focus:border-indigo-500"
         required
       />
