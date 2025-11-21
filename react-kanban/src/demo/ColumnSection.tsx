@@ -5,6 +5,8 @@ import { useState } from "react";
 import { ItemCard } from "./components/ItemCard";
 import { useAppContext, type Card } from "../context";
 import { ModalDelete } from "./components/ModalDelete";
+import { useDroppable } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 interface ColumnSectionProps {
   name: string;
@@ -17,7 +19,7 @@ export function ColumnSection({
   name,
   columnIndex,
 }: ColumnSectionProps) {
-  const { handleAddNewCardOnColumn, handleDeleteColumn } = useAppContext();
+  const { handleAddNewCardOnColumn, handleDeleteColumn, columns } = useAppContext();
   const [open, setOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [newCard, setNewCard] = useState<Card>({
@@ -25,8 +27,17 @@ export function ColumnSection({
     description: "",
   });
 
+   const { isOver, setNodeRef } = useDroppable({
+    id: `column-${columnIndex}`,
+  });
+
+   const cardIds = columns[columnIndex]?.cards.map((_, index) => 
+    `card-${columnIndex}-${index}`
+  ) || [];
+
   function HandleDeleteColumn() {
     handleDeleteColumn(columnIndex);
+    setOpen(false);
   }
 
   function handleAddCard() {
@@ -69,7 +80,14 @@ export function ColumnSection({
         />
       </Modal>
       <div
-        className={`bg-gray-300 flex flex-col w-full p-4 rounded-2xl shadow-inner`}
+        ref={setNodeRef}
+        className={`
+          ${
+            isOver ? 'border-indigo-400 bg-indigo-50' : 
+            'border-transparent hover:border-gray-300'
+          }
+         bg-gray-300 flex flex-col w-full p-4 rounded-2xl shadow-inner
+         `}
       >
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold mb-2">{name}</h2>
@@ -94,7 +112,11 @@ export function ColumnSection({
             </p>
           </div>
         </div>
-        <div className="flex flex-col gap-2 rounded-2xl">{children}</div>
+        <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>
+          <div className="flex flex-col gap-2 rounded-2xl">
+            {children}
+          </div>
+        </SortableContext>
       </div>
     </>
   );

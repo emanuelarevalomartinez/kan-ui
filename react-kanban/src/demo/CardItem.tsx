@@ -4,6 +4,9 @@ import { Modal } from "./components/Modal";
 import { ModalDelete } from "./components/ModalDelete";
 import { ItemWritingOnCard } from "./components/ItemWritingOnCard";
 import { useAppContext } from "../context";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
+import { IoIosKeypad } from "react-icons/io";
 
 interface CardItemProps {
   title: string;
@@ -23,6 +26,15 @@ export function CardItem({
   const [open, setOpen] = useState(false);
   const [writing, setWriting] = useState(false);
   const [tempDescription, setTempDescription] = useState(description ?? "");
+
+    const {attributes, listeners, transform, setNodeRef} = useSortable(
+      { 
+        id: `card-${columnIndex}-${cardIndex}` 
+      });
+
+      const style = {
+    transform: CSS.Transform.toString(transform),
+  };
 
   function HandleDeletecardItem() {
     console.log("Delete carditem");
@@ -72,7 +84,13 @@ export function CardItem({
         />
       </Modal>
 
-      <div className="relative bg-[#FEFEFE] p-4 rounded-2xl shadow hover:shadow-md transition-shadow">
+      <div 
+      style={style}
+      {...attributes}
+        className={`relative bg-[#FEFEFE] rounded-2xl shadow hover:shadow-md 
+          transition-all p-4 cursor-pointer`}
+      ref={setNodeRef}
+      >
         <div
           onClick={() => {
             handleWriteOnCard();
@@ -91,6 +109,12 @@ export function CardItem({
           className="absolute right-2 bottom-2 cursor-pointer"
         >
           <RxTrash />
+        </p>
+
+        <p
+        {...listeners}
+        className="absolute top-2 right-2 cursor-grab">
+          <IoIosKeypad />
         </p>
       </div>
     </>

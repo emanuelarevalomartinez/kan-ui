@@ -6,7 +6,7 @@ type AppContextType = {
   newColumn: Column;
   setNewColumn: React.Dispatch<React.SetStateAction<Column>>;
   columns: Column[];
-  setColumns: (e: Column[]) => void;
+  setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
   handleAddNewColumn: (e: string) => void;
   openModalBoardContainer: boolean;
   setOpenModalBoardContainer: (e: boolean) => void;
@@ -16,6 +16,7 @@ type AppContextType = {
   handleDeleteCard: (e: number, f: number)=> void;
   handleUpdateCardDescription: (e: number, f: number, g: string) => void;
   handleDeleteColumn: ( e: number) => void;
+   handleMoveCard: (e: number, f: number, g: number, h: number)=> void;
 };
 
 export interface Column {
@@ -141,6 +142,23 @@ function handleDeleteColumn(columnIndex: number) {
   );
 }
 
+function handleMoveCard(
+  fromColumnIndex: number,
+  toColumnIndex: number,
+  cardIndex: number,
+  newCardIndex: number
+) {
+  setColumns((prev) => {
+    const updated = [...prev];
+    const card = updated[fromColumnIndex].cards[cardIndex];
+
+    updated[fromColumnIndex].cards.splice(cardIndex, 1);
+    updated[toColumnIndex].cards.splice(newCardIndex, 0, card);
+
+    return updated;
+  });
+}
+
 
 
   return (
@@ -161,6 +179,7 @@ function handleDeleteColumn(columnIndex: number) {
         handleDeleteCard,
         handleUpdateCardDescription,
         handleDeleteColumn,
+        handleMoveCard,
       }}
     >
       {children}
