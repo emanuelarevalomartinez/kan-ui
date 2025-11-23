@@ -4,11 +4,12 @@ import { VscClose } from "react-icons/vsc";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onCancel? : ()=> void;
   title?: string;
   children: React.ReactNode;
 }
 
-export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+export function Modal({ isOpen, onClose, onCancel, title, children }: ModalProps) {
   return (
     <div
       className={`fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-300 
@@ -26,7 +27,13 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         <div className="flex items-center justify-between border-b p-4">
           <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
           <button
-            onClick={onClose}
+            onClick={ ()=> { 
+              if (onCancel) {
+                onCancel();
+              } else {
+                onClose();
+              }
+             } }
             className="text-gray-500 hover:text-gray-800 transition"
           >
             <VscClose className="w-6 h-6" />

@@ -7,11 +7,12 @@ import { useAppContext, type Card } from "../context";
 import { ModalDelete } from "./components/ModalDelete";
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { v4 as uuidv4 } from "uuid";
 
 interface ColumnSectionProps {
   name: string;
   children: React.ReactNode;
-  columnIndex: number;
+  columnIndex: string;
 }
 
 export function ColumnSection({
@@ -23,20 +24,25 @@ export function ColumnSection({
   const [open, setOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [newCard, setNewCard] = useState<Card>({
+    id: "",
     title: "",
     description: "",
   });
 
    const { isOver, setNodeRef } = useDroppable({
-    id: `column-${columnIndex}`,
+    id: columnIndex,
   });
-
-   const cardIds = columns[columnIndex]?.cards.map((_, index) => 
-    `card-${columnIndex}-${index}`
-  ) || [];
+  
+  const column = columns.find(col => col.id === columnIndex);
+  const cardIds = column ? column.cards.map(card => card.id) : [];
 
   function HandleDeleteColumn() {
     handleDeleteColumn(columnIndex);
+    setOpen(false);
+  }
+
+  function HandleClosseModal() {
+    setNewCard({ id: "", title: "", description: "" });
     setOpen(false);
   }
 
@@ -57,7 +63,7 @@ export function ColumnSection({
     }
 
     handleAddNewCardOnColumn(columnIndex, newCard);
-    setNewCard({ title: "", description: "" });
+    setNewCard({ id: uuidv4(), title: "", description: "" });
     setOpen(false);
   }
 
@@ -66,11 +72,11 @@ export function ColumnSection({
       <ModalDelete
         isOpen={open && deleting}
         onDelete={() => HandleDeleteColumn()}
-        onClose={() => setOpen(false)}
+        onClose={() => HandleClosseModal() }
       ></ModalDelete>
       <Modal
         isOpen={open && !deleting}
-        onClose={() => setOpen(false)}
+        onClose={() => HandleClosseModal() }
         title="Nueva Nota"
       >
         <ItemCard
@@ -86,7 +92,7 @@ export function ColumnSection({
             isOver ? 'border-indigo-400 bg-indigo-50' : 
             'border-transparent hover:border-gray-300'
           }
-         bg-gray-300 flex flex-col w-full p-4 rounded-2xl shadow-inner
+         bg-gray-300 flex flex-col w-full p-4 rounded-2xl shadow-inner select-none
          `}
       >
         <div className="flex justify-between items-center">

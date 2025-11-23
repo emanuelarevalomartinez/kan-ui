@@ -11,8 +11,8 @@ import { IoIosKeypad } from "react-icons/io";
 interface CardItemProps {
   title: string;
   description?: string;
-  columnIndex: number;
-  cardIndex: number;
+  columnIndex: string;
+  cardIndex: string;
 }
 
 export function CardItem({
@@ -27,9 +27,9 @@ export function CardItem({
   const [writing, setWriting] = useState(false);
   const [tempDescription, setTempDescription] = useState(description ?? "");
 
-    const {attributes, listeners, transform, setNodeRef} = useSortable(
+    const {listeners, transform, setNodeRef} = useSortable(
       { 
-        id: `card-${columnIndex}-${cardIndex}` 
+        id: cardIndex
       });
 
       const style = {
@@ -37,13 +37,11 @@ export function CardItem({
   };
 
   function HandleDeletecardItem() {
-    console.log("Delete carditem");
     handleDeleteCard(columnIndex, cardIndex);
     setOpen(false);
   }
 
   function handleWriteOnCard() {
-    console.log("Writing carditem");
     setOpen(true);
     setWriting(true);
   }
@@ -53,6 +51,11 @@ export function CardItem({
       handleUpdateCardDescription(columnIndex, cardIndex, tempDescription);
     }
 
+    setWriting(false);
+    setOpen(false);
+  }
+
+  function handleModalCancel(){
     setWriting(false);
     setOpen(false);
   }
@@ -73,6 +76,7 @@ export function CardItem({
 
       <Modal
         isOpen={open && writing}
+        onCancel={ ()=> { handleModalCancel() } }
         onClose={() => {
           handleModalClose();
         }}
@@ -86,12 +90,12 @@ export function CardItem({
 
       <div 
       style={style}
-      {...attributes}
         className={`relative bg-[#FEFEFE] rounded-2xl shadow hover:shadow-md 
-          transition-all p-4 cursor-pointer`}
+          transition-all p-4 select-none`}
       ref={setNodeRef}
       >
         <div
+        className="cursor-pointer"
           onClick={() => {
             handleWriteOnCard();
           }}

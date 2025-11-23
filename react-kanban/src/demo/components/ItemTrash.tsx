@@ -8,12 +8,10 @@ interface ItemTrashProps {
 export function ItemTrash({ isDragging }: ItemTrashProps){
 
      const { isOver, setNodeRef } = useDroppable({
-    id: 'trash-bin',
+    id: 'trash',
   });
 
-  // Solo mostrar cuando hay un elemento siendo arrastrado
   if (!isDragging) return null;
-
 
     return(
         <div
@@ -36,7 +34,7 @@ export function ItemTrash({ isDragging }: ItemTrashProps){
       >
         <RxTrash className="w-6 h-6" />
         <span className="font-semibold">
-          {isOver ? 'Eliminar' : 'Eliminar'}
+          {isOver ? 'Eliminar' : 'Arrastra para Eliminar'}
         </span>
       </div>
     </div>
