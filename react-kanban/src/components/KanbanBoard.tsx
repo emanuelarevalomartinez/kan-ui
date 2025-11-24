@@ -17,10 +17,9 @@ interface Props {
 
 export function KanbanBoard({ children, title }: Props) {
 
-function handleAddNewSection() {
+  function handleAddNewSection() {
     // implement your logic to add a new KanbanColumn
   }
-
 
   return (
     <DndContext>
@@ -33,7 +32,7 @@ function handleAddNewSection() {
         </div>
 
         <div className="space-x-4 overflow-x-auto">
-          <div className="grid flex-shrink-0 w-full grid-cols-1 md:grid-cols-4 gap-2 rounded-2xl">
+          <div className="grid w-full grid-cols-1 md:grid-cols-4 gap-2 rounded-2xl">
             {children}
           </div>
         </div>
@@ -43,19 +42,25 @@ function handleAddNewSection() {
 }`;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-indigo-800 mb-2">KanbanBoard</h1>
-        <p className="text-gray-600">El contenedor del tablero Kanban</p>
+    <div className="space-y-8">
+
+      <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-6 shadow-md">
+        <h1 className="text-4xl font-extrabold text-indigo-700">
+          KanbanBoard
+        </h1>
+        <p className="text-gray-600 mt-1">
+          Contenedor principal del tablero Kanban
+        </p>
       </div>
 
-      <div className="flex gap-4">
+      {/* TABS */}
+      <div className="flex gap-4 bg-white shadow-lg p-2 rounded-full w-fit border border-gray-200">
         <button
           onClick={() => setShowCode(false)}
-          className={`px-4 py-2 rounded-lg font-medium transition-all ${
+          className={`px-5 py-2 rounded-full font-medium transition-all duration-300 ${
             !showCode
-              ? "bg-indigo-600 text-white shadow"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              ? "bg-indigo-600 text-white shadow-lg scale-105"
+              : "text-gray-600 hover:bg-gray-100"
           }`}
         >
           👀 Vista
@@ -63,137 +68,98 @@ function handleAddNewSection() {
 
         <button
           onClick={() => setShowCode(true)}
-          className={`px-4 py-2 rounded-lg font-medium transition-all ${
+          className={`px-5 py-2 rounded-full font-medium transition-all duration-300 ${
             showCode
-              ? "bg-indigo-600 text-white shadow"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              ? "bg-indigo-600 text-white shadow-lg scale-105"
+              : "text-gray-600 hover:bg-gray-100"
           }`}
         >
           💻 Código
         </button>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         {showCode ? (
           <ItemCodeExample
             titleFile="KanbanBoard.tsx"
             codeExample={codeExample}
           />
         ) : (
-          /* Codigo real del componente */
-
-          <div>
-            <div className="flex bg-indigo-200 rounded-xl p-2 ">
-              <DndContext
-              /* logica para efectuar mientras se inici la animacion, mientras se cancela y cuando se suelta */
-              /*  onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}
-                    onDragCancel={handleDragCancel} */
-              >
-                <div className="bg-white p-6 rounded-2xl text-black w-full select-none">
-                  <div className="flex justify-between items-center px-2">
-                    <h1 className="text-2xl font-bold py-2">
-                      Título del Tablero
-                    </h1>
-                    <p
-                      className="cursor-pointer"
-                      onClick={() => {
-                        // add new KanbanColumn
-                      }}
-                    >
-                      <TbNewSection className="w-6 h-6" />
-                    </p>
-                  </div>
-
-                  <div className=" space-x-4 overflow-x-auto">
-                    <div
-                      className={`grid flex-shrink-0 w-full grid-cols-1 md:grid-cols-2 gap-2 rounded-2xl`}
-                    >
-                      {/*  {children} */}
-                    </div>
-                  </div>
+          <div className="bg-indigo-50 rounded-2xl p-6 shadow-lg">
+            <DndContext>
+              <div className="bg-white p-6 rounded-2xl text-black w-full select-none">
+                <div className="flex justify-between items-center px-2">
+                  <h1 className="text-2xl font-bold py-2">
+                    Título del Tablero
+                  </h1>
+                  <button
+                    className="hover:bg-indigo-100 transition p-2 rounded-lg"
+                    onClick={() => {}}
+                  >
+                    <TbNewSection className="w-6 h-6" />
+                  </button>
                 </div>
 
-                {/* Este componente opciónal sirve para animar los elementos mientras se estan arrastrando */}
+                <div className="space-x-4 overflow-x-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    {/* {children} */}
+                  </div>
+                </div>
+              </div>
+            </DndContext>
 
-                {/*  <DragOverlay>
-                      {activeCard ? (
-                        <div className="bg-white p-4 rounded-2xl shadow-xl border-2 border-indigo-400 rotate-3 opacity-60 transform scale-105">
-                          <h3 className="font-medium text-md mb-1 text-black">
-                            {activeCard.title}
-                          </h3>
-                          {activeCard.description && (
-                            <p className="text-sm text-gray-600 line-clamp-2">
-                              {activeCard.description}
-                            </p>
-                          )}
-                        </div>
-                      ) : null}
-                    </DragOverlay> */}
-              </DndContext>
-            </div>
-
-            <div className="mt-10 border-t pt-6 space-y-4">
-              <h2 className="text-xl font-bold text-indigo-700">
+            <div className="mt-10 space-y-6 border-t pt-6">
+              <h2 className="text-2xl font-bold text-indigo-700">
                 Cómo usar este componente
               </h2>
 
               <p className="text-gray-700">
-                El componente <strong>KanbanBoard</strong> actúa como contenedor
-                del tablero. Dentro de él colocas tus columnas del sistema
-                Kanban.
+                <strong>KanbanBoard</strong> envuelve columnas del sistema
+                Kanban. Se le pasan <strong>children</strong> y un{" "}
+                <strong>título</strong>.
               </p>
 
-              <p className="text-gray-700">
-                El componente recibe dos parametros donde el primero es el{" "}
-                <strong>titulo</strong> del tablero y el segundo es el{" "}
-                <strong>hijo</strong> el cual debe ser un KanbanColumn
-              </p>
-
-              <div className="bg-black text-gray-200 p-4 rounded-lg text-xs">
-                <p className="text-gray-400 mb-2">Ejemplo de implementación:</p>
+              <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
+                <p className="text-indigo-300 mb-2">Ejemplo mínimo:</p>
                 <pre className="overflow-x-auto whitespace-pre">
-                  {`<KanbanBoard title="Mi tablero Kanban">{children}</KanbanBoard>`}
+                  {`<KanbanBoard title="Mi Kanban">{children}</KanbanBoard>`}
                 </pre>
               </div>
 
-              <div className="bg-black text-gray-200 p-4 rounded-lg text-xs">
-                <p className="text-gray-400 mb-2">Ejemplo concreto:</p>
+              <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
+                <p className="text-indigo-300 mb-2">Ejemplo completo:</p>
                 <pre className="overflow-x-auto whitespace-pre">
-                  {`<KanbanBoard title="Mi tablero Kanban">
-                    <KanbanColumn title="Pendiente" cards={cardsPending} />
-                    <KanbanColumn title="En Progreso" cards={cardsProgress} />
-                    <KanbanColumn title="Completado" cards={cardsDone} />
-                    </KanbanBoard>`}
+{`
+<KanbanBoard title="Mi tablero">
+  <KanbanColumn title="Pendiente" cards={cardsPending} />
+  <KanbanColumn title="En Progreso" cards={cardsProgress} />
+  <KanbanColumn title="Completado" cards={cardsDone} />
+</KanbanBoard>
+`}
                 </pre>
               </div>
             </div>
 
-            <div className="mt-10 border-t pt-6 space-y-4">
-              <h2 className="text-xl font-bold text-indigo-700">
-                Acciónes con el componente
+            <div className="mt-10 space-y-4 border-t pt-6">
+              <h2 className="text-2xl font-bold text-indigo-700">
+                Acciones del componente
               </h2>
 
               <p className="text-gray-700">
-                Puedes ejecutar cierta lógica dentro del componente{" "}
-                <strong>KanbanBoard</strong> actúa como contenedor del tablero.
-                Dentro de él colocas tus columnas del sistema Kanban.
+                Puedes crear nuevas columnas usando{" "}
+                <strong>handleAddNewSection()</strong>
               </p>
 
-              <div className="bg-black text-gray-200 p-4 rounded-lg text-xs">
-                <p className="text-gray-400 mb-2">Ejemplo de implementación:</p>
-                <pre className="overflow-x-auto whitespace-pre">
-                  {`<KanbanBoard title="Mi tablero Kanban">
-                    <KanbanColumn title="Pendiente" cards={cardsPending} />
-                    <KanbanColumn title="En Progreso" cards={cardsProgress} />
-                    <KanbanColumn title="Completado" cards={cardsDone} />
-                    </KanbanBoard>`}
+              <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
+                <pre>
+{`function handleAddNewSection() {
+  // tu lógica para añadir una KanbanColumn
+}`}
                 </pre>
               </div>
 
-              <p className="text-gray-600 text-sm italic">
-                Puedes añadir lógica extra como creación de nuevas columnas,
-                eliminar notas o activar animaciones mientras arrastras.
+              <p className="text-gray-500 text-sm italic">
+                Agrega lógica extra como animaciones o eliminación de tarjetas.
               </p>
             </div>
           </div>

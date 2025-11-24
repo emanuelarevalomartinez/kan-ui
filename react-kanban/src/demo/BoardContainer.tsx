@@ -58,18 +58,18 @@ export function BoardContainer({ children, title, columns }: BoardContainerProps
         <div className=" bg-white p-6 rounded-2xl text-black w-full select-none">
           <div className="flex justify-between items-center px-2">
             <h1 className="text-2xl font-bold py-2">{title}</h1>
-            <p
-              className="cursor-pointer"
+            <button
+              className="hover:bg-indigo-100 transition p-2 rounded-lg"
               onClick={() => {
                 handleAddNewSection();
               }}
             >
-              <TbNewSection className="w-6 h-6" />
-            </p>
+              <TbNewSection className="w-6 h-6 " />
+            </button>
           </div>
 
-          <div className=" space-x-4 overflow-x-auto">
-            <div className={`grid flex-shrink-0 w-full grid-cols-1 ${gridCols} gap-2 rounded-2xl`}>
+          <div className="space-x-4 overflow-x-auto">
+            <div className={`grid w-full grid-cols-1 ${gridCols} gap-2 rounded-2xl`}>
               {children}
             </div>
           </div>
