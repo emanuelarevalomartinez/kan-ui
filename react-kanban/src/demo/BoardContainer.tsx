@@ -57,7 +57,7 @@ export function BoardContainer({ children, title, columns }: BoardContainerProps
       >
         <div className=" bg-white p-6 rounded-2xl text-black w-full select-none">
           <div className="flex justify-between items-center px-2">
-            <h1 className="text-2xl font-bold mb-4">{title}</h1>
+            <h1 className="text-2xl font-bold py-2">{title}</h1>
             <p
               className="cursor-pointer"
               onClick={() => {

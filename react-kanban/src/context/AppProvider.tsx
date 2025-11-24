@@ -269,7 +269,6 @@ const [columns, setColumns] = useState<Column[]>([
   const [isDragging, setIsDragging] = useState(false);
 
   function handleDragStart(event:  DragStartEvent) {
-    /// setActiveId(event.active.id);
     setActiveId(event.active.id as string);
     setIsDragging(true);
   }

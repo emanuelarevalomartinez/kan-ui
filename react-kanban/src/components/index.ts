@@ -1,3 +1,6 @@
 export * from './ComponentsGallery'
 export * from './KanbanBoard'
 export * from './Requirements'
+export * from './KanbanColumn'
+export * from './KanbanCard'
+export * from './AboutUs'

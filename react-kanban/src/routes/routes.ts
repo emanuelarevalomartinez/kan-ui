@@ -3,9 +3,12 @@
 
     export const APP_ROUTES = {
         HOME: "/",
-        COMPONENTS: "/components-gallery",
-        REQUIREMENTS: "/components-gallery/requirements",
-        KANBANBOARD: "/components-gallery/kanbanBoard",
+        COMPONENTS: "/components",
+        REQUIREMENTS: "/components/requirements",
+        KANBAN_BOARD: "/components/kanban-board",
+        KANBAN_COLUMN: "/components/kanban-column",
+        KANBAN_CARD: "/components/kanban-card",
+        ABOUT_US: "/components/about-us",
         DEMO: "/demo",
     } as const;
     
