@@ -13,7 +13,7 @@ const { columns } = useAppContext();
       <div className="mt-16 min-h-[91vh] bg-gradient-to-br from-indigo-50 to-indigo-100">
         <div className="flex px-4">
           <div className="mt-4 w-full pb-4">
-            <BoardContainer title="Mi Tablero Kanban" columns={columns}>
+            <BoardContainer title="AvanCode Challenge" columns={columns}>
               {columns.map((column) => (
                 <ColumnSection
                   key={column.id}
