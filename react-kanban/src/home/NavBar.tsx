@@ -57,10 +57,10 @@ export function Navbar() {
             ))}
 
           <div className="flex lg:hidden items-center">
-            {location.pathname !== APP_ROUTES.HOME ? (
+            {location.pathname !== APP_ROUTES.HOME && location.pathname !== APP_ROUTES.DEMO ? (
               <RiMenuFill className="cursor-pointer" onClick={toggleSidebar} />
             ) : (
-              <> </>
+              <> <p className="w-4">  </p> </>
             )}
           </div>
         </div>
