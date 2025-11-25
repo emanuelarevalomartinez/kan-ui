@@ -75,7 +75,7 @@ import { Requirements } from "./Requirements";
                       className="block cursor-pointer px-4 py-3 rounded-lg text-gray-700 hover:text-white hover:bg-indigo-600 transition-all duration-200 font-medium"
                       onClick={ ()=> { handleNavigateTo("aboutUs") } }
                     >
-                      Sobre mí
+                      Sobre Nosotros
                     </a>
                   </nav>
                 </div>

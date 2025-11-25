@@ -1,11 +1,36 @@
+import { useState } from "react";
+import { ItemBasicComponentInfo } from "./items/ItemBasicComponentInfo";
+import { ItemCodeExample } from "./items/ItemCodeExample";
+import { kanbanCardCodeExample } from "./items/kanbanCard/kanbanCardCodeExample";
+import { KanbanCardGuide } from "./items/kanbanCard/KanbanCardGuide";
 
 
 export function KanbanCard(){
 
-  return(
-    <>
-      <div> KanbanCard </div>
-    </>
-  )
+  const [showCode, setShowCode] = useState(false);
+  
+    return(
+      <div className="space-y-8">
+     
+           <ItemBasicComponentInfo 
+             title="KanbanCard" 
+             description="Tarjeta individual que representa una tarea en el tablero" 
+             showCode={showCode} 
+             setShowCode={setShowCode} 
+           />
+     
+           <div className="mt-6">
+             {showCode ? (
+               <ItemCodeExample
+                 titleFile="KanbanCard.tsx"
+                 codeExample={kanbanCardCodeExample}
+               />
+             ) : (
+               <KanbanCardGuide />
+             )
+             }
+           </div>
+         </div>
+    )
     
 }

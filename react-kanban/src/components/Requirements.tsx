@@ -3,6 +3,10 @@ import { RiTailwindCssFill } from "react-icons/ri";
 import { TbCopy } from "react-icons/tb";
 
 export function Requirements() {
+
+  const dependencies = `npm install react tailwindcss @dnd-kit/core @dnd-kit/sortable
+              @dnd-kit/modifiers`;
+
   return (
     <>
       <div className="space-y-6">
@@ -25,9 +29,7 @@ export function Requirements() {
             Requisitos de instalación
           </h2>
 
-          
-            {/* React */}
-            <div className="flex p-4 justify-around">
+            <div className="flex px-4 py-16 justify-around">
              <FaReact className="w-24 h-24 text-[#58C4DC]" />
              <RiTailwindCssFill className="w-24 h-24 text-[#00BCFF]" />
              <FaExpandArrowsAlt className="w-24 h-24 text-[#000000]" />
@@ -35,16 +37,14 @@ export function Requirements() {
 
           <span className="bg-blue-100 flex gap-5 items-center justify-between py-3 px-5 rounded-full">
             <code className="text-blue-900 text-left whitespace-nowrap overflow-hidden overflow-ellipsis">
-              npm install react tailwindcss @dnd-kit/core @dnd-kit/sortable
-              @dnd-kit/modifiers
+              {dependencies}
             </code>
             <span className="text-blue-900 cursor-pointer">
-              <TbCopy />
+              <TbCopy onClick={ ()=> { navigator.clipboard.writeText(dependencies) } } />
             </span>
           </span>
         </div>
 
-        {/* Indicaciones de uso */}
         <p className="text-gray-600 text-sm italic">
           Copia el componente que necesites y añade tu lógica en las secciones
           comentadas. ¡Así de simple!
@@ -53,3 +53,5 @@ export function Requirements() {
     </>
   );
 }
+
+
