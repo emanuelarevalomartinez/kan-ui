@@ -1,6 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../routes";
-import { useState } from "react";
 import { useAppContext } from "../context";
 import { RiMenuFill } from "react-icons/ri";
 
@@ -13,9 +12,7 @@ export function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { currentLanguage, setCurrentLanguage } = useAppContext();
-
-  const [language, setLanguage] = useState(false);
+  const { toggleSidebar } = useAppContext();
 
   function HandleNavigateToHome() {
     navigate(APP_ROUTES.HOME);
@@ -32,37 +29,39 @@ export function Navbar() {
         </h1>
 
         <div className="flex gap-10">
-          {location.pathname !== APP_ROUTES.HOME && navItems.length !== 0 && navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `relative font-medium transition-colors ${
-                  isActive
-                    ? "text-indigo-600"
-                    : "text-gray-700 hover:text-indigo-500"
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  {item.title}
-                  <span
-                    className={`absolute left-0 bottom-0 h-[3px] rounded-full transition-all duration-300 ${
-                      isActive ? "bg-indigo-600 w-full" : "bg-transparent w-0"
-                    }`}
-                  />
-                </>
-              )}
-            </NavLink>
-          ))}
+          {location.pathname !== APP_ROUTES.HOME &&
+            navItems.length !== 0 &&
+            navItems.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `relative font-medium transition-colors ${
+                    isActive
+                      ? "text-indigo-600"
+                      : "text-gray-700 hover:text-indigo-500"
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {item.title}
+                    <span
+                      className={`absolute left-0 bottom-0 h-[3px] rounded-full transition-all duration-300 ${
+                        isActive ? "bg-indigo-600 w-full" : "bg-transparent w-0"
+                      }`}
+                    />
+                  </>
+                )}
+              </NavLink>
+            ))}
 
           <div className="flex lg:hidden items-center">
-            {
-              location.pathname !== APP_ROUTES.HOME ? 
-              ( <RiMenuFill className="cursor-pointer" /> ) : 
-              ( <> </> )
-            }
+            {location.pathname !== APP_ROUTES.HOME ? (
+              <RiMenuFill className="cursor-pointer" onClick={toggleSidebar} />
+            ) : (
+              <> </>
+            )}
           </div>
         </div>
       </div>

@@ -3,8 +3,6 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 type AppContextType = {
-  currentLanguage: string;
-  setCurrentLanguage: (newCurrentLanguage: string) => void;
   newColumn: Column;
   setNewColumn: React.Dispatch<React.SetStateAction<Column>>;
   columns: Column[];
@@ -25,6 +23,8 @@ type AppContextType = {
   handleDragEnd: (e: DragEndEvent) => void;
   handleDragCancel: ()=> void;
   activeCard: ActiveCard | null;
+  isSidebarOpen: boolean;
+  toggleSidebar: ()=> void;
 };
 
 export interface Column {
@@ -47,7 +47,6 @@ export interface ActiveCard extends Card {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [currentLanguage, setCurrentLanguage] = useState("");
   const [openModalBoardContainer, setOpenModalBoardContainer] = useState(false);
   const [openModalColumnContainer, setOpenModalColumnContainer] =
     useState(false);
@@ -57,6 +56,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     name: "",
     cards: [],
   });
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
 
 const [columns, setColumns] = useState<Column[]>([
   {
@@ -386,8 +391,6 @@ const [columns, setColumns] = useState<Column[]>([
   return (
     <AppContext.Provider
       value={{
-        currentLanguage,
-        setCurrentLanguage,
         newColumn,
         setNewColumn,
         columns,
@@ -408,6 +411,8 @@ const [columns, setColumns] = useState<Column[]>([
         handleDragEnd,
         handleDragCancel,
         activeCard,
+        isSidebarOpen,
+        toggleSidebar,
       }}
     >
       {children}
