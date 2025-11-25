@@ -39,10 +39,10 @@ export function Start() {
           </div>
         </div>
 
-        <section className="container mx-auto px-6 py-12">
-          <div className="flex flex-col lg:flex-row items-center">
+        <section className="container mx-auto px-24 py-12">
+          <div className="flex flex-col lg:flex-row">
             <div className="lg:w-1/2 mb-16 lg:mb-0">
-              <div className="mb-8 inline-block terminal-box px-4 py-2 rounded-md">
+              <div className="inline-block terminal-box px-4 py-2 rounded-md">
                 <span className="text-cosmic-DEFAULT font-mono text-black">
                   v0.1.0
                 </span>
@@ -50,11 +50,6 @@ export function Start() {
                   // Latest release
                 </span>
               </div>
-
-              <p className="text-lg text-black mb-10 max-w-lg">
-                Diseñado para ser fácil de entender y reutilizar en cualquier
-                proyecto de React.js y otros frameworks similares.
-              </p>
 
               <div className="mt-12 flex items-center space-x-6">
                 <div className="flex -space-x-3">
@@ -68,7 +63,6 @@ export function Start() {
                   <p className="text-black text-sm">Emanuel Arévalo Martínez</p>
                   <div className="flex items-center space-x-4 mt-1">
                     <span className="font-mono">Ingeniero de Software</span>
-                    <span className="font-mono">FullStack Web Developer</span>
                   </div>
                 </div>
               </div>
@@ -86,29 +80,20 @@ export function Start() {
                     <div className="text-cosmic-DEFAULT">
                       ${" "}
                       <span className="text-gray-300">
-                        npm install @dnd-kit/core @dnd-kit/modifiers
-                        @dnd-kit/sortable
+                        npm install react tailwindcss @dnd-kit/core @dnd-kit/sortable
+              @dnd-kit/modifiers
                       </span>
                     </div>
                     <div className="text-gray-500 mt-2">
                       {" "}
-                      Downloading dnd dependencies...
-                    </div>
-                    <div className="text-green-400">
-                      ✓ Success! Dependencies donwloaded{" "}
+                      <p>added 286 packages, and audited 287 packages in 56s </p>
+                      <p> 72 packages are looking for funding </p>
+                      <p>run <span className="text-amber-400"> `npm fund` </span> for details  </p>
+                      <p>found <span className="text-green-400"> 0 </span> vulnerabilities </p>
+
                     </div>
                     <div className="mt-4 text-cosmic-DEFAULT">
-                      $ <span className="text-gray-300">cd stellar-app</span>
-                    </div>
-                    <div className="text-cosmic-DEFAULT">
-                      ${" "}
-                      <span className="text-gray-300">
-                        nebula deploy --prod
-                      </span>
-                    </div>
-                    <div className="text-gray-500 mt-2">
-                      {" "}
-                      Deploying to cosmic cluster...
+                      $
                     </div>
                     <div className="text-green-400 mt-4">
                       🚀 Configuration Finish!{" "}
