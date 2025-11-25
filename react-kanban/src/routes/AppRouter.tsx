@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../home";
-import { AboutUs, ComponentsGallery, KanbanBoard, KanbanCard, KanbanColumn } from "../components";
+import { AboutUs, CatalogView, KanbanBoard, KanbanCard, KanbanColumn } from "../components";
 import { DemoView } from "../demo";
 
 
@@ -10,8 +10,8 @@ const router = createBrowserRouter([
       element: <Home/>,
       children: [
         {
-          path: "components",
-          element: <ComponentsGallery />,
+          path: "catalog",
+          element: <CatalogView />,
           children: [
             {
               path: "kanban-board",

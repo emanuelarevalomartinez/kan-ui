@@ -11,7 +11,7 @@ export function Requirements() {
     <>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-indigo-800 mb-3">
+          <h1 className="text-xl lg:text-3xl font-bold text-indigo-800 mb-3">
             Kan-UI: Librería de Componentes Reutilizables
           </h1>
           <p className="text-gray-700 leading-relaxed">
@@ -25,14 +25,14 @@ export function Requirements() {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold text-indigo-700 mb-4">
+          <h2 className="text-lg lg:text-2xl font-semibold text-indigo-700 mb-4">
             Requisitos de instalación
           </h2>
 
-            <div className="flex px-4 py-16 justify-around">
-             <FaReact className="w-24 h-24 text-[#58C4DC]" />
-             <RiTailwindCssFill className="w-24 h-24 text-[#00BCFF]" />
-             <FaExpandArrowsAlt className="w-24 h-24 text-[#000000]" />
+            <div className="flex items-center px-4 py-16 justify-around">
+             <FaReact className="w-12 h-12 lg:w-24 lg:h-24 text-[#58C4DC]" />
+             <RiTailwindCssFill className="w-12 h-12 lg:w-24 lg:h-24 text-[#00BCFF]" />
+             <FaExpandArrowsAlt className="w-12 h-12 lg:w-24 lg:h-24 text-[#000000]" />
             </div>
 
           <span className="bg-blue-100 flex gap-5 items-center justify-between py-3 px-5 rounded-full">

@@ -1,4 +1,4 @@
-export * from './ComponentsGallery'
+export * from './CatalogView'
 export * from './KanbanBoard'
 export * from './Requirements'
 export * from './KanbanColumn'

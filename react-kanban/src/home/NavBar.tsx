@@ -2,9 +2,10 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../routes";
 import { useState } from "react";
 import { useAppContext } from "../context";
+import { RiMenuFill } from "react-icons/ri";
 
 const navItems = [
-  { title: "Componentes", path: APP_ROUTES.COMPONENTS },
+  { title: "Catálogo", path: APP_ROUTES.COMPONENTS },
   { title: "Demo", path: APP_ROUTES.DEMO },
 ];
 
@@ -56,10 +57,12 @@ export function Navbar() {
             </NavLink>
           ))}
 
-          <div>
-            <p className="cursor-pointer w-6"
-            onClick={ ()=> { setLanguage(!language) } }
-            > { language ? "ES" : "EN" } </p>
+          <div className="flex lg:hidden items-center">
+            {
+              location.pathname !== APP_ROUTES.HOME ? 
+              ( <RiMenuFill className="cursor-pointer" /> ) : 
+              ( <> </> )
+            }
           </div>
         </div>
       </div>

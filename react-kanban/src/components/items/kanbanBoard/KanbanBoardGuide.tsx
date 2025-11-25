@@ -80,13 +80,16 @@ export function KanbanBoardGuide() {
             <strong>handleAddNewSection()</strong> dentro del componente.
           </p>
 
-          <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
-            <pre className="whitespace-pre">
-              {`function handleAddNewSection() {
+           <div className="bg-black/90 text-gray-200 rounded-lg p-4 text-sm">
+             <p className="text-indigo-300 mb-2">Ejemplo de lógica:</p>
+             <pre className="overflow-x-auto whitespace-pre">
+{`
+function handleAddNewSection() {
   // tu lógica para añadir una KanbanColumn
-}`}
-            </pre>
-          </div>
+}
+`}
+             </pre>
+           </div>
 
           <p className="text-gray-500 text-sm italic">
             También puedes añadir funcionalidad como animaciones o guardar el

@@ -2,7 +2,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../routes";
 import { Requirements } from "./Requirements";
 
-export function ComponentsGallery() {
+export function CatalogView() {
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ export function ComponentsGallery() {
 
   return (
     <div className="mt-16 h-[91vh] bg-gradient-to-br from-indigo-50 to-indigo-100">
-      <div className="max-w-8xl mx-auto flex gap-6 px-6 py-6 h-full">
+      <div className="max-w-8xl mx-auto flex gap-6 px-2 py-2 lg:px-6 lg:py-6 h-full">
 
         <aside className="sidebar fixed lg:static w-56 transform -translate-x-[150%] lg:translate-x-0 transition-transform duration-300 rounded-2xl overflow-y-auto bg-white shadow-xl p-6">
 
@@ -73,7 +73,7 @@ export function ComponentsGallery() {
 
         </aside>
 
-        <main className="flex-1 bg-white rounded-3xl shadow-xl p-10 border overflow-y-auto border-indigo-100">
+        <main className="flex-1 bg-white rounded-3xl shadow-xl p-4 lg:p-10 border overflow-y-auto border-indigo-100">
           {location.pathname === APP_ROUTES.COMPONENTS ||
           location.pathname === APP_ROUTES.REQUIREMENTS ? (
             <Requirements />
