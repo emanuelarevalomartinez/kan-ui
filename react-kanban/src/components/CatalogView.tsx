@@ -64,8 +64,8 @@ export function CatalogView() {
             <nav className="space-y-2">
               <a
                 key="requirements"
-                onClick={() => handleNavigate(APP_ROUTES.CATALOG)}
-                className={getItemClass(APP_ROUTES.CATALOG)}
+                onClick={() => handleNavigate(APP_ROUTES.CATALOG_REQUIREMENTS)}
+                className={getItemClass(APP_ROUTES.CATALOG_REQUIREMENTS)}
               >
                 Requerimientos
               </a>
