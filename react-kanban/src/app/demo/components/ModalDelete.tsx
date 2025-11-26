@@ -31,8 +31,8 @@ export function ModalDelete({
         ${isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
       >
         <div className="flex items-center justify-center border-b p-4">
-          <h2 className="text-lg font-semibold text-gray-800">
-            ¿Estás seguro de eliminar {text} ?
+          <h2 className="text-lg text-center font-semibold text-gray-800">
+            {text}
           </h2>
         </div>
 

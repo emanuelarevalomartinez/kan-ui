@@ -70,7 +70,7 @@ export function KanbanCard({
     <>
       <ModalDelete
         isOpen={open && !writing}
-        text="Esta Nota"
+        text="¿ Eliminar Esta Nota ?"
         onDelete={() => HandleDeletecardItem()}
         onClose={() => setOpen(false)}
       ></ModalDelete>

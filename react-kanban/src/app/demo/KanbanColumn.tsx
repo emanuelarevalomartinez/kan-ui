@@ -86,7 +86,7 @@ export function KanbanColumn({
     <>
       <ModalDelete
         isOpen={open && deleting}
-        text="Esta Sección"
+        text="¿ Eliminar Esta Sección ?"
         onDelete={() => HandleDeleteColumn()}
         onClose={() => HandleClosseModal() }
       ></ModalDelete>
