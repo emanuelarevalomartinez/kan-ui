@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Home, Start } from "../app";
+import { HomeView, Start } from "../app";
 import {
   AboutUs,
   CatalogView,
@@ -13,7 +13,7 @@ import { DemoView } from "../app";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HomeView />,
     children: [
       {
         index: true,

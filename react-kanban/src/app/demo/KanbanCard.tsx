@@ -8,19 +8,19 @@ import { useSortable } from "@dnd-kit/sortable";
 import { IoIosKeypad } from "react-icons/io";
 import { useAppContext } from "../../context";
 
-interface CardItemProps {
+interface Props {
   title: string;
   description?: string;
   columnIndex: string;
   cardIndex: string;
 }
 
-export function CardItem({
+export function KanbanCard({
   title,
   description,
   columnIndex,
   cardIndex,
-}: CardItemProps) {
+}: Props) {
   const { handleDeleteCard, handleUpdateCardDescription } = useAppContext();
 
   const [open, setOpen] = useState(false);

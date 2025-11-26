@@ -5,13 +5,15 @@ import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { ItemTrash } from "./components/ItemTrash";
 import { useAppContext } from "../../context";
 import type { Column } from "../../interfaces";
-interface BoardContainerProps {
+
+
+interface Props {
   title: string;
   children: React.ReactNode;
   columns: Column[];
 }
 
-export function BoardContainer({ children, title, columns }: BoardContainerProps) {
+export function KanbanBoard({ children, title, columns }: Props) {
   const {
     newColumn,
     setNewColumn,

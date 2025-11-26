@@ -10,17 +10,17 @@ import { v4 as uuidv4 } from "uuid";
 import { useAppContext } from "../../context";
 import type { Card } from "../../interfaces";
 
-interface ColumnSectionProps {
+interface Props {
   name: string;
   children: React.ReactNode;
   columnIndex: string;
 }
 
-export function ColumnSection({
+export function KanbanColumn({
   children,
   name,
   columnIndex,
-}: ColumnSectionProps) {
+}: Props) {
   const { handleAddNewCardOnColumn, handleDeleteColumn, columns, setShowErrorMessage, 
     setErrorMessage, doesCardTitleExist, } = useAppContext();
   const [open, setOpen] = useState(false);
