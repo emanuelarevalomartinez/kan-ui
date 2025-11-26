@@ -1,14 +1,15 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../routes";
-import { Requirements } from "./Requirements";
 import { useAppContext } from "../context";
+import { useEffect, useRef } from "react";
 
 export function CatalogView() {
-  
   const location = useLocation();
   const navigate = useNavigate();
 
   const { isSidebarOpen, toggleSidebar } = useAppContext();
+
+  const mainRef = useRef<HTMLDivElement>(null);
 
   function handleNavigate(path: string) {
     navigate(path);
@@ -28,6 +29,12 @@ export function CatalogView() {
     `;
   }
 
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [location.pathname]);
+
   return (
     <div className="mt-16 h-[91vh] bg-gradient-to-br from-indigo-50 to-indigo-100 relative">
       {isSidebarOpen && (
@@ -46,7 +53,7 @@ export function CatalogView() {
             ${
               isSidebarOpen
                 ? "h-[88vh] translate-x-0"
-                : "h-[88vh] -translate-x-[150%] lg:translate-x-0"
+                : "h-[84vh] -translate-x-[150%] lg:translate-x-0"
             }
           `}
         >
@@ -57,8 +64,8 @@ export function CatalogView() {
             <nav className="space-y-2">
               <a
                 key="requirements"
-                onClick={() => handleNavigate(APP_ROUTES.COMPONENTS)}
-                className={getItemClass(APP_ROUTES.COMPONENTS)}
+                onClick={() => handleNavigate(APP_ROUTES.CATALOG)}
+                className={getItemClass(APP_ROUTES.CATALOG)}
               >
                 Requerimientos
               </a>
@@ -71,9 +78,9 @@ export function CatalogView() {
             </h2>
             <nav className="space-y-2">
               {[
-                { label: "KanbanBoard", path: APP_ROUTES.KANBAN_BOARD },
-                { label: "KanbanColumn", path: APP_ROUTES.KANBAN_COLUMN },
-                { label: "KanbanCard", path: APP_ROUTES.KANBAN_CARD },
+                { label: "KanbanBoard", path: APP_ROUTES.CATALOG_KANBAN_BOARD },
+                { label: "KanbanColumn", path: APP_ROUTES.CATALOG_KANBAN_COLUMN },
+                { label: "KanbanCard", path: APP_ROUTES.CATALOG_KANBAN_CARD },
               ].map(({ label, path }) => (
                 <a
                   key={path}
@@ -92,8 +99,8 @@ export function CatalogView() {
             </h2>
             <nav className="space-y-2">
               <a
-                onClick={() => handleNavigate(APP_ROUTES.ABOUT_US)}
-                className={getItemClass(APP_ROUTES.ABOUT_US)}
+                onClick={() => handleNavigate(APP_ROUTES.CATALOG_ABOUT_US)}
+                className={getItemClass(APP_ROUTES.CATALOG_ABOUT_US)}
               >
                 Sobre Nosotros
               </a>
@@ -101,13 +108,11 @@ export function CatalogView() {
           </div>
         </aside>
 
-        <main className="flex-1 bg-white rounded-3xl shadow-xl p-4 lg:p-10 border overflow-y-auto border-indigo-100">
-          {location.pathname === APP_ROUTES.COMPONENTS ||
-          location.pathname === APP_ROUTES.REQUIREMENTS ? (
-            <Requirements />
-          ) : (
-            <Outlet />
-          )}
+        <main
+          ref={mainRef}
+          className="flex-1 bg-white rounded-3xl shadow-xl p-4 lg:p-10 border overflow-y-auto border-indigo-100"
+        >
+          <Outlet />
         </main>
       </div>
     </div>

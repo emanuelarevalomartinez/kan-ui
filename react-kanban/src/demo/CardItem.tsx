@@ -70,6 +70,7 @@ export function CardItem({
     <>
       <ModalDelete
         isOpen={open && !writing}
+        text="Esta Nota"
         onDelete={() => HandleDeletecardItem()}
         onClose={() => setOpen(false)}
       ></ModalDelete>

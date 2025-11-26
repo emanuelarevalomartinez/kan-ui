@@ -20,7 +20,8 @@ export function ColumnSection({
   name,
   columnIndex,
 }: ColumnSectionProps) {
-  const { handleAddNewCardOnColumn, handleDeleteColumn, columns } = useAppContext();
+  const { handleAddNewCardOnColumn, handleDeleteColumn, columns, setShowErrorMessage, 
+    setErrorMessage, doesCardTitleExist, } = useAppContext();
   const [open, setOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [newCard, setNewCard] = useState<Card>({
@@ -42,28 +43,41 @@ export function ColumnSection({
   }
 
   function HandleClosseModal() {
-    setNewCard({ id: "", title: "", description: "" });
     setOpen(false);
+    setShowErrorMessage(false);
+    setErrorMessage("");
+    setNewCard({ id: "", title: "", description: "" });
   }
 
   function handleAddCard() {
     if (!newCard.title.trim() && !newCard.description.trim()) {
-      alert("El título y texto es obligatorio");
+      setShowErrorMessage(true);
+      setErrorMessage("El título y texto son obligatorio");
       return;
     }
 
     if (!newCard.title.trim()) {
-      alert("El título es obligatorio");
+      setShowErrorMessage(true);
+      setErrorMessage("El título es obligatorio");
       return;
     }
 
     if (!newCard.description.trim()) {
-      alert("La descripción es obligatoria");
+      setShowErrorMessage(true);
+      setErrorMessage("La descripción es obligatoria");
+      return;
+    }
+
+    if(doesCardTitleExist(newCard.title)){
+      setShowErrorMessage(true);
+      setErrorMessage("Ya existe una nota con ese nombre");
       return;
     }
 
     handleAddNewCardOnColumn(columnIndex, newCard);
     setNewCard({ id: uuidv4(), title: "", description: "" });
+    setShowErrorMessage(false);
+    setErrorMessage("");
     setOpen(false);
   }
 
@@ -71,6 +85,7 @@ export function ColumnSection({
     <>
       <ModalDelete
         isOpen={open && deleting}
+        text="Esta Sección"
         onDelete={() => HandleDeleteColumn()}
         onClose={() => HandleClosseModal() }
       ></ModalDelete>

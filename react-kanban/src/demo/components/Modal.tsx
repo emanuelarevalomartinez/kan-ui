@@ -1,5 +1,6 @@
 import React from "react";
 import { VscClose } from "react-icons/vsc";
+import { useAppContext } from "../../context";
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,6 +11,9 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, onCancel, title, children }: ModalProps) {
+
+  const { showErrorMessage, errorMessage } = useAppContext();
+
   return (
     <div
       className={`fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-300 
@@ -40,7 +44,12 @@ export function Modal({ isOpen, onClose, onCancel, title, children }: ModalProps
           </button>
         </div>
 
-        <div className="p-4 text-gray-700">{children}</div>
+        <div className="p-4 text-gray-700">
+          { showErrorMessage &&
+           <p className="text-center text-red-500 font-medium">{errorMessage}</p>
+          }
+          {children}
+          </div>
       </div>
     </div>
   );

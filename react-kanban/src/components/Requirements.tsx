@@ -3,9 +3,7 @@ import { RiTailwindCssFill } from "react-icons/ri";
 import { TbCopy } from "react-icons/tb";
 
 export function Requirements() {
-
-  const dependencies = `npm install react tailwindcss @dnd-kit/core @dnd-kit/sortable
-              @dnd-kit/modifiers`;
+  const dependencies = `npm install react tailwindcss @dnd-kit/core @dnd-kit/sortable @dnd-kit/modifiers`;
 
   return (
     <>
@@ -29,20 +27,23 @@ export function Requirements() {
             Requisitos de instalación
           </h2>
 
-            <div className="flex items-center px-4 py-16 justify-around">
-             <FaReact className="w-12 h-12 lg:w-24 lg:h-24 text-[#58C4DC]" />
-             <RiTailwindCssFill className="w-12 h-12 lg:w-24 lg:h-24 text-[#00BCFF]" />
-             <FaExpandArrowsAlt className="w-12 h-12 lg:w-24 lg:h-24 text-[#000000]" />
-            </div>
+          <div className="grid grid-cols-3 gap-6 p-6 bg-white rounded-2xl lg:flex lg:justify-around">
+            <FaReact className="w-14 h-14 text-[#58C4DC] mx-auto" />
+            <RiTailwindCssFill className="w-14 h-14 text-[#00BCFF] mx-auto" />
+            <FaExpandArrowsAlt className="w-14 h-14 text-gray-900 mx-auto" />
+          </div>
 
-          <span className="bg-blue-100 flex gap-5 items-center justify-between py-3 px-5 rounded-full">
-            <code className="text-blue-900 text-left whitespace-nowrap overflow-hidden overflow-ellipsis">
+          <div className="bg-blue-100 flex gap-3 items-center justify-between py-3 px-4 rounded-xl mt-4">
+            <code className="text-blue-900 text-sm sm:text-base block overflow-x-auto whitespace-nowrap">
               {dependencies}
             </code>
-            <span className="text-blue-900 cursor-pointer">
-              <TbCopy onClick={ ()=> { navigator.clipboard.writeText(dependencies) } } />
-            </span>
-          </span>
+            <button
+              onClick={() => navigator.clipboard.writeText(dependencies)}
+              className="text-blue-900 hover:scale-110 transition-transform duration-200"
+            >
+              <TbCopy size={20} />
+            </button>
+          </div>
         </div>
 
         <p className="text-gray-600 text-sm italic">
@@ -53,5 +54,3 @@ export function Requirements() {
     </>
   );
 }
-
-

@@ -4,7 +4,7 @@ import { useAppContext } from "../context";
 import { RiMenuFill } from "react-icons/ri";
 
 const navItems = [
-  { title: "Catálogo", path: APP_ROUTES.COMPONENTS },
+  { title: "Catálogo", path: APP_ROUTES.CATALOG },
   { title: "Demo", path: APP_ROUTES.DEMO },
 ];
 

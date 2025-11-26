@@ -25,6 +25,11 @@ type AppContextType = {
   activeCard: ActiveCard | null;
   isSidebarOpen: boolean;
   toggleSidebar: ()=> void;
+  errorMessage: string;
+  setErrorMessage: (e: string)=> void;
+  showErrorMessage: boolean;
+  setShowErrorMessage: (e: boolean)=> void;
+  doesCardTitleExist: (e: string)=> boolean;
 };
 
 export interface Column {
@@ -50,6 +55,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [openModalBoardContainer, setOpenModalBoardContainer] = useState(false);
   const [openModalColumnContainer, setOpenModalColumnContainer] =
     useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const [newColumn, setNewColumn] = useState<Column>({
     id: "",
@@ -173,13 +180,15 @@ const [columns, setColumns] = useState<Column[]>([
 
   function handleAddNewColumn(name: string) {
     if (name === "") {
-      alert("Nueva sección no puede estar vacia");
-      return;
+     setShowErrorMessage(true);
+     setErrorMessage("Nueva sección no puede estar vacia");
+    return;
     }
 
     if (name.length > 20) {
-      alert("Nueva sección tener un nombre superior a 20 caractéres");
-      return;
+      setShowErrorMessage(true);
+      setErrorMessage("Nueva sección tener un nombre inferior a 20 caractéres");
+    return;
     }
 
     const exists = columns.some(
@@ -187,7 +196,8 @@ const [columns, setColumns] = useState<Column[]>([
     );
 
     if (exists) {
-      alert("Ya existe una sección con ese nombre");
+      setShowErrorMessage(true);
+      setErrorMessage("Ya existe una sección con ese nombre");
       return;
     }
 
@@ -199,6 +209,8 @@ const [columns, setColumns] = useState<Column[]>([
 
     setColumns((prev) => [...prev, newColumn]);
     setNewColumn({ id: "", name: "", cards: [] });
+    setShowErrorMessage(false);
+    setErrorMessage("");
     setOpenModalBoardContainer(false);
   }
 
@@ -252,6 +264,15 @@ const [columns, setColumns] = useState<Column[]>([
       prevColumns.filter((col) => col.id !== columnId)
     );
   }
+
+  function doesCardTitleExist(title: string): boolean {
+  return columns.some((column) =>
+    column.cards.some(
+      (card) =>
+        card.title.trim().toLowerCase() === title.trim().toLowerCase()
+    )
+  );
+}
 
   function handleMoveCard(
     fromColumnIndex: number,
@@ -413,6 +434,11 @@ const [columns, setColumns] = useState<Column[]>([
         activeCard,
         isSidebarOpen,
         toggleSidebar,
+        errorMessage,
+        setErrorMessage,
+        showErrorMessage, 
+        setShowErrorMessage,
+        doesCardTitleExist,
       }}
     >
       {children}

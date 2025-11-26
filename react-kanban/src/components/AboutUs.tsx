@@ -121,7 +121,7 @@ export function AboutUs() {
             {/* Emanuel */}
             <div className="flex items-center space-x-4">
               <img
-                className="w-12 h-12 rounded-full border-2 border-indigo-500"
+                className="w-12 h-12 rounded-full"
                 src="/icons/logo.png"
                 alt="Emanuel"
               />
@@ -138,7 +138,7 @@ export function AboutUs() {
             {/* Daniel */}
             <div className="flex items-center space-x-4">
               <img
-                className="w-12 h-12 rounded-full border-2 border-indigo-500"
+                className="w-12 h-12 rounded-full"
                 src="/icons/logo_2.png"
                 alt="Daniel"
               />

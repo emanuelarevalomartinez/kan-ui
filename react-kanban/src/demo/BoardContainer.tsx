@@ -22,6 +22,8 @@ export function BoardContainer({ children, title, columns }: BoardContainerProps
     handleDragEnd,
     handleDragCancel,
     activeCard,
+    setShowErrorMessage, 
+    setErrorMessage,
   } = useAppContext();
 
   function handleAddNewSection() {
@@ -30,6 +32,8 @@ export function BoardContainer({ children, title, columns }: BoardContainerProps
 
   function handleCloseColumnModal() {
     setOpenModalBoardContainer(false);
+    setShowErrorMessage(false);
+    setErrorMessage("");
     setNewColumn({ id: "", name: "", cards: [] });
   }
 

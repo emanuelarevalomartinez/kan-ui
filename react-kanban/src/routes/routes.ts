@@ -1,12 +1,12 @@
 
     export const APP_ROUTES = {
         HOME: "/",
-        COMPONENTS: "/catalog",
-        REQUIREMENTS: "/catalog/requirements",
-        KANBAN_BOARD: "/catalog/kanban-board",
-        KANBAN_COLUMN: "/catalog/kanban-column",
-        KANBAN_CARD: "/catalog/kanban-card",
-        ABOUT_US: "/catalog/about-us",
+        CATALOG: "/catalog",
+        CATALOG_REQUIREMENTS: "/catalog/requirements",
+        CATALOG_KANBAN_BOARD: "/catalog/kanban-board",
+        CATALOG_KANBAN_COLUMN: "/catalog/kanban-column",
+        CATALOG_KANBAN_CARD: "/catalog/kanban-card",
+        CATALOG_ABOUT_US: "/catalog/about-us",
         DEMO: "/demo",
     } as const;
     

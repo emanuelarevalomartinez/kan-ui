@@ -1,12 +1,14 @@
 
 interface ModalDeleteProps {
   isOpen: boolean;
+  text: string;
   onClose: () => void;
   onDelete: () => void;
 }
 
 export function ModalDelete({
   isOpen,
+  text,
   onClose,
   onDelete
 }: ModalDeleteProps) {
@@ -30,7 +32,7 @@ export function ModalDelete({
       >
         <div className="flex items-center justify-center border-b p-4">
           <h2 className="text-lg font-semibold text-gray-800">
-            ¿Estás seguro?
+            ¿Estás seguro de eliminar {text} ?
           </h2>
         </div>
 

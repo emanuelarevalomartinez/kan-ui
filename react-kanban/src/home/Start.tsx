@@ -24,7 +24,7 @@ export function Start() {
             React.
           </p>
           <div className="flex w-2/3 lg:w-full mx-auto flex-col gap-2 lg:gap-0 lg:flex-row justify-center">
-            <NavLink to={APP_ROUTES.COMPONENTS}>
+            <NavLink to={APP_ROUTES.CATALOG}>
               <div className="mr-0 lg:mr-5 flex justify-center items-center rounded-xl bg-black px-8 py-4 text-center font-semibold text-white [box-shadow:rgb(19,_83,_254)_6px_6px]">
                 <span>Ver Catálogo</span>
               </div>
