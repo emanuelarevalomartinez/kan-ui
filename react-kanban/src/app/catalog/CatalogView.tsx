@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { APP_ROUTES } from "../routes";
-import { useAppContext } from "../context";
 import { useEffect, useRef } from "react";
+import { useAppContext } from "../../context";
+import { APP_ROUTES } from "../../routes";
 
 export function CatalogView() {
   const location = useLocation();

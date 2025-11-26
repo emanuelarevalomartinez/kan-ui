@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Home, Start } from "../home";
+import { Home, Start } from "../app";
 import {
   AboutUs,
   CatalogView,
@@ -7,8 +7,8 @@ import {
   KanbanCard,
   KanbanColumn,
   Requirements,
-} from "../components";
-import { DemoView } from "../demo";
+} from "../app";
+import { DemoView } from "../app";
 
 const router = createBrowserRouter([
   {

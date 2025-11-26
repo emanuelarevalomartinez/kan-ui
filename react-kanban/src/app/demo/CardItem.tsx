@@ -3,10 +3,10 @@ import { RxTrash } from "react-icons/rx";
 import { Modal } from "./components/Modal";
 import { ModalDelete } from "./components/ModalDelete";
 import { ItemWritingOnCard } from "./components/ItemWritingOnCard";
-import { useAppContext } from "../context";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import { IoIosKeypad } from "react-icons/io";
+import { useAppContext } from "../../context";
 
 interface CardItemProps {
   title: string;

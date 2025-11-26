@@ -1,9 +1,10 @@
 import { TbNewSection } from "react-icons/tb";
 import { Modal } from "./components/Modal";
 import { ItemColumn } from "./components/ItemColumn";
-import { useAppContext, type Column } from "../context";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { ItemTrash } from "./components/ItemTrash";
+import { useAppContext } from "../../context";
+import type { Column } from "../../interfaces";
 interface BoardContainerProps {
   title: string;
   children: React.ReactNode;

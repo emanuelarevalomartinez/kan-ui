@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ItemBasicComponentInfo } from "./items/ItemBasicComponentInfo";
-import { ItemCodeExample } from "./items/ItemCodeExample";
-import { kanbanColumnCodeExample } from "./items/kanbanColumn/kanbanColumnCodeExample";
-import { KanbanColumnGuide } from "./items/kanbanColumn/KanbanColumnGuide";
+import { ItemBasicComponentInfo } from "./components/ItemBasicComponentInfo";
+import { ItemCodeExample } from "./components/ItemCodeExample";
+import { kanbanColumnCodeExample } from "./components/kanbanColumn/kanbanColumnCodeExample";
+import { KanbanColumnGuide } from "./components/kanbanColumn/KanbanColumnGuide";
 
 
 export function KanbanColumn(){

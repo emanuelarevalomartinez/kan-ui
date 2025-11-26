@@ -1,7 +1,7 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { APP_ROUTES } from "../routes";
-import { useAppContext } from "../context";
 import { RiMenuFill } from "react-icons/ri";
+import { APP_ROUTES } from "../../routes";
+import { useAppContext } from "../../context";
 
 const navItems = [
   { title: "Catálogo", path: APP_ROUTES.CATALOG },

@@ -1,5 +1,4 @@
-export * from './home'
+export * from './app'
 export * from './routes'
-export * from './components'
-export * from './demo'
 export * from './context'
+export * from './interfaces'

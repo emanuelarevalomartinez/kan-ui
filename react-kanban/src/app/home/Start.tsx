@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { APP_ROUTES } from "../routes";
 import { FaPlay } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
+import { APP_ROUTES } from "../../routes";
 
 export function Start() {
   return (

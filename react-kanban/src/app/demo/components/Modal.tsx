@@ -1,6 +1,6 @@
 import React from "react";
 import { VscClose } from "react-icons/vsc";
-import { useAppContext } from "../../context";
+import { useAppContext } from "../../../context";
 
 interface ModalProps {
   isOpen: boolean;

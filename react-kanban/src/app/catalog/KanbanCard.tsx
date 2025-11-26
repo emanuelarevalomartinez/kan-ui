@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ItemBasicComponentInfo } from "./items/ItemBasicComponentInfo";
-import { ItemCodeExample } from "./items/ItemCodeExample";
-import { kanbanCardCodeExample } from "./items/kanbanCard/kanbanCardCodeExample";
-import { KanbanCardGuide } from "./items/kanbanCard/KanbanCardGuide";
+import { ItemBasicComponentInfo } from "./components/ItemBasicComponentInfo";
+import { ItemCodeExample } from "./components/ItemCodeExample";
+import { kanbanCardCodeExample } from "./components/kanbanCard/kanbanCardCodeExample";
+import { KanbanCardGuide } from "./components/kanbanCard/KanbanCardGuide";
 
 
 export function KanbanCard(){

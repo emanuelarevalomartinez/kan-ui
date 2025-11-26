@@ -3,11 +3,12 @@ import { HiPlusSmall } from "react-icons/hi2";
 import { Modal } from "./components/Modal";
 import { useState } from "react";
 import { ItemCard } from "./components/ItemCard";
-import { useAppContext, type Card } from "../context";
 import { ModalDelete } from "./components/ModalDelete";
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { v4 as uuidv4 } from "uuid";
+import { useAppContext } from "../../context";
+import type { Card } from "../../interfaces";
 
 interface ColumnSectionProps {
   name: string;

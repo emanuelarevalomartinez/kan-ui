@@ -1,4 +1,4 @@
-import { useAppContext } from "../context";
+import { useAppContext } from "../../context";
 import { BoardContainer } from "./BoardContainer";
 import { CardItem } from "./CardItem";
 import { ColumnSection } from "./ColumnSection";

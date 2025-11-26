@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ItemCodeExample } from "./items/ItemCodeExample";
-import { ItemBasicComponentInfo } from "./items/ItemBasicComponentInfo";
-import { KanbanBoardGuide } from "./items/kanbanBoard/KanbanBoardGuide";
-import { kanbanBoardCodeExample } from "./items/kanbanBoard/kanbanBoardCodeExample";
+import { ItemCodeExample } from "./components/ItemCodeExample";
+import { ItemBasicComponentInfo } from "./components/ItemBasicComponentInfo";
+import { KanbanBoardGuide } from "./components/kanbanBoard/KanbanBoardGuide";
+import { kanbanBoardCodeExample } from "./components/kanbanBoard/kanbanBoardCodeExample";
 
 export function KanbanBoard() {
 
