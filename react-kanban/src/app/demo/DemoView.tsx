@@ -4,6 +4,7 @@ import { KanbanBoard } from "./KanbanBoard";
 import { KanbanCard } from "./KanbanCard";
 import { KanbanColumn } from "./KanbanColumn";
 import { initDevosaurus } from 'devosaurus';
+import { checkPassword } from "unipass-validator/browser";
 
 
 export function DemoView() {
@@ -12,6 +13,10 @@ const { columns } = useAppContext();
 const devo = initDevosaurus();
 
 useEffect(() => {
+
+const result = checkPassword('123456');
+console.log(result);
+
   devo.addCommand('greet', ['hello', 'good morning'], () => {
     alert('Hello there! 👋');
   });
