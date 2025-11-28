@@ -1,12 +1,22 @@
+import { useEffect } from "react";
 import { useAppContext } from "../../context";
 import { KanbanBoard } from "./KanbanBoard";
 import { KanbanCard } from "./KanbanCard";
 import { KanbanColumn } from "./KanbanColumn";
+import { initDevosaurus } from 'devosaurus';
 
 
 export function DemoView() {
 
 const { columns } = useAppContext();
+const devo = initDevosaurus();
+
+useEffect(() => {
+  devo.addCommand('greet', ['hello', 'good morning'], () => {
+    alert('Hello there! 👋');
+  });
+}, [])
+
 
   return (
     <>
