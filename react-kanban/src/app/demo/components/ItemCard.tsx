@@ -1,4 +1,5 @@
-import type { Card } from "../../context";
+import type { Card } from "../../../interfaces";
+
 
 interface ItemCardProps {
   newCard: Card;

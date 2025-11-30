@@ -21,7 +21,7 @@ export function KanbanCard({
   columnIndex,
   cardIndex,
 }: Props) {
-  const { handleDeleteCard, handleUpdateCardDescription } = useAppContext();
+  const { handleDeleteCard, handleUpdateCardDescription, setShowErrorMessage, setErrorMessage } = useAppContext();
 
   const [open, setOpen] = useState(false);
   const [writing, setWriting] = useState(false);
@@ -47,15 +47,26 @@ export function KanbanCard({
   }
 
   function handleModalClose() {
-    if (writing) {
-      handleUpdateCardDescription(columnIndex, cardIndex, tempDescription);
-    }
 
-    setWriting(false);
-    setOpen(false);
+    if(tempDescription.length === 0){
+      setShowErrorMessage(true);
+      setErrorMessage("La nueva descripción no puede estar vacía");
+    } else {
+      
+      if (writing) {
+        handleUpdateCardDescription(columnIndex, cardIndex, tempDescription);
+      }
+  
+      setShowErrorMessage(false);
+      setErrorMessage("");
+      setWriting(false);
+      setOpen(false);
+    }
   }
 
   function handleModalCancel(){
+    setShowErrorMessage(false);
+    setErrorMessage("");
     setWriting(false);
     setOpen(false);
   }

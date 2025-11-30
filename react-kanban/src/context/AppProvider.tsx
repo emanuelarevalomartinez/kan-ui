@@ -122,10 +122,6 @@ const [columns, setColumns] = useState<Column[]>(columns_data);
     cardId: string,
     description: string
   ) {
-    if (description.length === 0) {
-      alert("La nueva descripción no puede estar vacía");
-      return;
-    }
 
     setColumns((prev) =>
       prev.map((col) =>
