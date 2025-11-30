@@ -3,9 +3,14 @@ import { ItemBasicComponentInfo } from "./components/ItemBasicComponentInfo";
 import { ItemCodeExample } from "./components/ItemCodeExample";
 import { kanbanColumnCodeExample } from "./components/kanbanColumn/kanbanColumnCodeExample";
 import { KanbanColumnGuide } from "./components/kanbanColumn/KanbanColumnGuide";
+import { useAppContext } from "../../context";
+import { textKanbanColumn } from "./translate";
 
 
 export function KanbanColumn(){
+
+  const { language } = useAppContext();
+  const text = textKanbanColumn[language];
 
   const [showCode, setShowCode] = useState(false);
 
@@ -13,8 +18,8 @@ export function KanbanColumn(){
     <div className="space-y-8">
    
          <ItemBasicComponentInfo 
-           title="KanbanColumn" 
-           description="Columna individual dentro del tablero Kanban" 
+           title={text.title} 
+           description={text.description} 
            showCode={showCode} 
            setShowCode={setShowCode} 
          />

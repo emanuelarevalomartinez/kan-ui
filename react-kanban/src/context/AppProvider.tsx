@@ -3,8 +3,12 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 import type { ActiveCard, Card, Column } from "../interfaces";
 import { columns_data } from "./columns_data";
+import { getLanguageLocalStore, setLanguageLocalStore, type LANGUAGE } from "../data";
 
 type AppContextType = {
+  language: LANGUAGE;
+  setLanguage: (e: LANGUAGE) => void;
+  changeLanguage: (e: LANGUAGE)=> void;
   newColumn: Column;
   setNewColumn: React.Dispatch<React.SetStateAction<Column>>;
   columns: Column[];
@@ -39,6 +43,24 @@ type AppContextType = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
+
+const [language, setLanguage] = useState<LANGUAGE>(() => {
+
+  if(getLanguageLocalStore()){
+    return getLanguageLocalStore() as LANGUAGE;
+  } else {
+    
+    const browserLang = navigator.language.startsWith("es") ? "es" : "en";
+    setLanguageLocalStore(browserLang);
+    return browserLang;
+  }
+});
+
+const changeLanguage = (lang: LANGUAGE) => {
+  setLanguage(lang);
+  setLanguageLocalStore(lang);
+};
+
   const [openModalBoardContainer, setOpenModalBoardContainer] = useState(false);
   const [openModalColumnContainer, setOpenModalColumnContainer] =
     useState(false);
@@ -304,6 +326,9 @@ const [columns, setColumns] = useState<Column[]>(columns_data);
   return (
     <AppContext.Provider
       value={{
+        language,
+        setLanguage,
+        changeLanguage,
         newColumn,
         setNewColumn,
         columns,

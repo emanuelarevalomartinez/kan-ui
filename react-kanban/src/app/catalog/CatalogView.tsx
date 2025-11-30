@@ -3,12 +3,14 @@ import { useEffect, useRef } from "react";
 import { useAppContext, useVoice } from "../../context";
 import { APP_ROUTES } from "../../routes";
 import { Actions } from "devosaurus";
+import { textCatalogView } from "./translate";
 
 export function CatalogView() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { isSidebarOpen, toggleSidebar } = useAppContext();
+  const { language, isSidebarOpen, toggleSidebar } = useAppContext();
+  const text = textCatalogView[language];
 
   const mainRef = useRef<HTMLDivElement>(null);
 
@@ -84,7 +86,7 @@ export function CatalogView() {
         >
           <div>
             <h2 className="text-lg font-semibold text-indigo-700 mb-3 uppercase tracking-wide">
-              Primeros Pasos
+              {text.gettingStarted}
             </h2>
             <nav className="space-y-2">
               <a
@@ -92,14 +94,14 @@ export function CatalogView() {
                 onClick={() => handleNavigate(APP_ROUTES.CATALOG_REQUIREMENTS)}
                 className={getItemClass(APP_ROUTES.CATALOG_REQUIREMENTS)}
               >
-                Requerimientos
+                {text.requirements}
               </a>
             </nav>
           </div>
 
           <div className="mt-6">
             <h2 className="text-lg font-semibold text-indigo-700 mb-3 uppercase tracking-wide">
-              Componentes
+              {text.components}
             </h2>
             <nav className="space-y-2">
               {[
@@ -120,14 +122,14 @@ export function CatalogView() {
 
           <div className="mt-6">
             <h2 className="text-lg font-semibold text-indigo-700 mb-3 uppercase tracking-wide">
-              Acerca de
+              {text.about}
             </h2>
             <nav className="space-y-2">
               <a
                 onClick={() => handleNavigate(APP_ROUTES.CATALOG_ABOUT_US)}
                 className={getItemClass(APP_ROUTES.CATALOG_ABOUT_US)}
               >
-                Sobre Nosotros
+                 {text.aboutUs}
               </a>
             </nav>
           </div>

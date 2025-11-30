@@ -1,5 +1,7 @@
 import { FaRegEye } from "react-icons/fa";
 import { GrPersonalComputer } from "react-icons/gr";
+import { useAppContext } from "../../../context";
+import { textItemBasicComponent } from "./translate";
 
 interface ItemBasicCommponentInfo {
     title: string;
@@ -9,6 +11,9 @@ interface ItemBasicCommponentInfo {
 }
 
 export function ItemBasicComponentInfo({ title, description, showCode, setShowCode }: ItemBasicCommponentInfo){
+
+  const { language } = useAppContext();
+    const text = textItemBasicComponent[language];
 
   return(
     <>
@@ -31,7 +36,7 @@ export function ItemBasicComponentInfo({ title, description, showCode, setShowCo
                 }`}
               >
                 <p> <FaRegEye className="w-6 h-6" /> </p>
-                <p> Vista </p>
+                <p> {text.view} </p>
                 
               </button>
       
@@ -44,7 +49,7 @@ export function ItemBasicComponentInfo({ title, description, showCode, setShowCo
                 }`}
               >
                 <p> <GrPersonalComputer className="w-6 h-6" /> </p>
-                <p> Código </p>
+                <p> {text.code} </p>
       
               </button>
             </div>

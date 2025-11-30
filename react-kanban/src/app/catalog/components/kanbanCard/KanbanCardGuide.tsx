@@ -2,8 +2,14 @@ import { useSortable } from "@dnd-kit/sortable";
 import { IoIosKeypad } from "react-icons/io";
 import { RxTrash } from "react-icons/rx";
 import { CSS } from "@dnd-kit/utilities";
+import { useAppContext } from "../../../../context";
+import { textKanbanCardGuide } from "../translate";
 
 export function KanbanCardGuide() {
+
+  const { language } = useAppContext();
+  const text = textKanbanCardGuide[language];
+
   const { listeners, setNodeRef, transform, transition } = useSortable({
     id: "cardIndex",
   });
@@ -28,10 +34,10 @@ export function KanbanCardGuide() {
             }}
           >
             <h3 className="font-medium text-md mb-1 text-gray-800">
-              Título de la tarjeta
+              {text.title}
             </h3>
             <p className="text-sm text-gray-600">
-              Descripción de la tarjeta
+              {text.cardDescription}
             </p>
           </div>
 
@@ -40,7 +46,7 @@ export function KanbanCardGuide() {
             onClick={() => {
               /* handleDeleteCard(); */
             }}
-            title="Eliminar tarjeta"
+            title={text.deleteCardButton}
           >
             <RxTrash />
           </button>
@@ -48,7 +54,7 @@ export function KanbanCardGuide() {
           <span
             {...listeners}
             className="absolute right-2 top-2 cursor-grab text-gray-600 hover:text-indigo-600"
-            title="Mover tarjeta"
+            title={text.moveCardButton}
           >
             <IoIosKeypad />
           </span>
@@ -57,45 +63,37 @@ export function KanbanCardGuide() {
 
       <div className="mt-10 space-y-6 border-t pt-6">
         <h2 className="text-2xl font-bold text-indigo-700">
-          Cómo usar este componente
+          {text.howToUse}
         </h2>
 
         <p className="text-gray-700">
-          <strong>KanbanCard</strong> representa una tarjeta dentro de una columna.
-          Generalmente incluye: título, descripción y acciones.
+          <strong>KanbanCard</strong> {text.description}
         </p>
 
         <ul className="text-gray-700 list-disc pl-6">
           <li>
-            <strong>title</strong>: título visible
+            <strong>title</strong>: {text.propTitle}
           </li>
           <li>
-            <strong>description</strong>: texto breve debajo del título
+            <strong>description</strong>: {text.propDescription}
           </li>
           <li>
-            <strong>columnIndex</strong>: id de columna (para drag & drop)
+            <strong>columnIndex</strong>: {text.propColumnIndex}
           </li>
           <li>
-            <strong>cardIndex</strong>: id de tarjeta (para ordenar drag & drop)
+            <strong>cardIndex</strong>: {text.propCardIndex}
           </li>
         </ul>
 
         <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
-          <p className="text-indigo-300 mb-2">Ejemplo mínimo:</p>
-          <pre className="overflow-x-auto whitespace-pre">
-{`<KanbanCard title="Nota" cardIndex="1" columnIndex="1" />`}
-          </pre>
-        </div>
-
-        <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
-          <p className="text-indigo-300 mb-2">Ejemplo completo:</p>
+          <p className="text-indigo-300 mb-2">{text.example}</p>
           <pre className="overflow-x-auto whitespace-pre">
 {`
 <KanbanCard
-  title="Tarea general"
-  description="Contenido adicional"
-  columnIndex="1"
-  cardIndex="0"
+  title="Pending work"
+  description="Finish the login page"
+  columnIndex="column-index-0"
+  cardIndex="card-index-0"
 />
 `}
           </pre>
@@ -103,28 +101,26 @@ export function KanbanCardGuide() {
       </div>
 
       <div className="mt-10 space-y-4 border-t pt-6">
-        <h2 className="text-2xl font-bold text-indigo-700">Acciones disponibles</h2>
+        <h2 className="text-2xl font-bold text-indigo-700">{text.actionsAvailable}</h2>
 
         <p className="text-gray-700">
-          Puedes implementar lógica para:
+          {text.actionsDescription}
         </p>
 
         <ul className="text-gray-700 list-disc pl-6">
           <li>
-            <strong>Editar contenido</strong> al hacer clic en el texto
+            {text.actionEdit}
           </li>
           <li>
-            <strong>Eliminar la tarjeta</strong> clic en{" "}
-            <RxTrash className="inline" />
+            {text.actionDelete} <RxTrash className="inline" />
           </li>
           <li>
-            <strong>Reordenar</strong> clic y arrastre en{" "}
-            <IoIosKeypad className="inline" />
+            {text.actionReorder} <IoIosKeypad className="inline" />
           </li>
         </ul>
 
           <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
-          <p className="text-indigo-300 mb-2">Ejemplo de lógica:</p>
+          <p className="text-indigo-300 mb-2">{text.logicExample}</p>
           <pre className="overflow-x-auto whitespace-pre">
 {`
 function handleWriteOnCard() {
@@ -139,7 +135,7 @@ function HandleDeleteCard() {
         </div>
 
          <p className="text-gray-500 text-sm italic">
-          Puedes conectar esta Tarjeta con un estado global o API para mayor control.
+          {text.extraNote}
         </p>
       </div>
     </div>

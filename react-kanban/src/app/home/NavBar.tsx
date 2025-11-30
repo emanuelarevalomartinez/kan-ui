@@ -5,8 +5,16 @@ import { APP_ROUTES } from "../../routes";
 import { useAppContext } from "../../context";
 import { HiOutlinePuzzle } from "react-icons/hi";
 import { HiOutlineLightBulb } from "react-icons/hi2";
+import { textNavBar } from "./translate";
+import type { JSX } from "react";
 
-const navItems = [
+interface NaveItems {
+  title: string;
+  path: string;
+  icon: JSX.Element;
+}
+
+const navItems: NaveItems[] = [
   { title: "Catálogo", path: APP_ROUTES.CATALOG, icon: <HiOutlinePuzzle /> },
   { title: "Demo", path: APP_ROUTES.DEMO, icon: <HiOutlineLightBulb /> },
 ];
@@ -14,7 +22,10 @@ const navItems = [
 export function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { toggleSidebar, isSidebarOpen } = useAppContext();
+  const { language, changeLanguage, toggleSidebar, isSidebarOpen } =
+    useAppContext();
+
+  const text = textNavBar[language];
 
   function HandleNavigateToHome() {
     navigate(APP_ROUTES.HOME);
@@ -32,31 +43,60 @@ export function Navbar() {
 
         <div className="flex gap-6 items-center">
           {location.pathname !== APP_ROUTES.HOME &&
-            navItems.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  `relative font-medium transition-colors flex items-center ${
-                    isActive
-                      ? "text-indigo-600"
-                      : "text-gray-700 hover:text-indigo-500"
-                  }`
+            navItems.map((item) => {
+              const title =
+                item.path === APP_ROUTES.CATALOG
+                  ? text.catalog
+                  : item.path === APP_ROUTES.DEMO
+                  ? text.demo
+                  : item.title;
+
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `relative font-medium transition-colors flex items-center ${
+                      isActive
+                        ? "text-indigo-600"
+                        : "text-gray-700 hover:text-indigo-500"
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span className="lg:hidden text-2xl">{item.icon}</span>
+                      <span className="hidden lg:inline">{title}</span>
+                      <span
+                        className={`absolute left-0 bottom-0 h-[3px] rounded-full transition-all duration-300 ${
+                          isActive
+                            ? "bg-indigo-600 w-full"
+                            : "bg-transparent w-0"
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              );
+            })}
+          <div>
+            <span
+              onClick={() => {
+                if (language === "es") {
+                  changeLanguage("en");
+                } else if (language === "en") {
+                  changeLanguage("es");
                 }
-              >
-                {({ isActive }) => (
-                  <>
-                    <span className="lg:hidden text-2xl">{item.icon}</span>
-                    <span className="hidden lg:inline">{item.title}</span>
-                    <span
-                      className={`absolute left-0 bottom-0 h-[3px] rounded-full transition-all duration-300 ${
-                        isActive ? "bg-indigo-600 w-full" : "bg-transparent w-0"
-                      }`}
-                    />
-                  </>
-                )}
-              </NavLink>
-            ))}
+              }}
+              className="cursor-pointer rounded-lg border border-gray-300 p-1 transition-colors duration-300 hover:bg-gray-100 inline-flex items-center justify-center"
+            >
+              {language === "es" ? (
+                <span className="fi fi-es"></span>
+              ) : (
+                <span className="fi fi-us"></span>
+              )}
+            </span>
+          </div>
 
           <div className="flex lg:hidden items-center">
             {location.pathname !== APP_ROUTES.HOME &&
@@ -72,7 +112,7 @@ export function Navbar() {
                 )}
               </button>
             ) : (
-              <span className="w-4" />
+              <></>
             )}
           </div>
         </div>

@@ -3,8 +3,13 @@ import { ItemCodeExample } from "./components/ItemCodeExample";
 import { ItemBasicComponentInfo } from "./components/ItemBasicComponentInfo";
 import { KanbanBoardGuide } from "./components/kanbanBoard/KanbanBoardGuide";
 import { kanbanBoardCodeExample } from "./components/kanbanBoard/kanbanBoardCodeExample";
+import { useAppContext } from "../../context";
+import { textKanbanBoard } from "./translate";
 
 export function KanbanBoard() {
+
+  const { language } = useAppContext();
+  const text = textKanbanBoard[language];
 
   const [showCode, setShowCode] = useState(false);
 
@@ -12,8 +17,8 @@ export function KanbanBoard() {
     <div className="space-y-8">
 
       <ItemBasicComponentInfo 
-        title="KanbanBoard" 
-        description="Contenedor principal del tablero Kanban" 
+        title={text.title} 
+        description={text.description} 
         showCode={showCode} 
         setShowCode={setShowCode} 
       />

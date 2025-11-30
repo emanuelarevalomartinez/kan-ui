@@ -1,0 +1,6 @@
+export * from './textRequirements'
+export * from './textKanbanBoard'
+export * from './textKanbanColumn'
+export * from './textKanbanCard'
+export * from './textAboutUs'
+export * from './textCatalowView'

@@ -2,16 +2,23 @@ import { NavLink } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 import { APP_ROUTES } from "../../routes";
+import { useAppContext } from "../../context";
+import { textStart } from "./translate";
 
 export function Start() {
+
+  const { language } = useAppContext();
+  const text = textStart[language];
+
   return (
     <div className="mt-16 w-screen">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 lg:py-24 md:px-10">
         <div className="mx-auto mb-4 w-full max-w-3xl text-center lg:mb-20">
           <h1 className="mb-4 text-2xl font-semibold lg:text-6xl leading-tight">
-            Tableros Kanban para React,
+          {text.title}
             <TypeAnimation
-              sequence={["Fácil", 4000, "", 1000]}
+              key={language}
+              sequence={[text.typingWords, 4000, "", 1000]}
               wrapper="span"
               cursor={true}
               repeat={Infinity}
@@ -19,21 +26,19 @@ export function Start() {
             />
           </h1>
           <p className="mx-auto mb-5 text-base lg:text-xl text-[#636262] lg:mb-8">
-            Componentes modulares y listos para usar con soporte para archivos,
-            etiquetas, estados y mucho más. Integración rápida en cualquier app
-            React.
+          {text.description}
           </p>
           <div className="flex w-2/3 lg:w-full mx-auto flex-col gap-2 lg:gap-0 lg:flex-row justify-center">
             <NavLink to={APP_ROUTES.CATALOG}>
               <div className="mr-0 lg:mr-5 flex justify-center items-center rounded-xl bg-black px-8 py-4 text-center font-semibold text-white [box-shadow:rgb(19,_83,_254)_6px_6px]">
-                <span>Ver Catálogo</span>
+                <span>{text.catalog}</span>
               </div>
             </NavLink>
 
             <NavLink to={APP_ROUTES.DEMO}>
               <div className="mr-0 lg:mr-5 flex justify-center items-center space-x-2 rounded-xl px-8 py-4 text-center font-semibold text-[#1353fe] [box-shadow:rgb(19,_83,_254)_6px_6px] border border-solid border-[#1353fe]">
                 <FaPlay />
-                <span className="text-black">Iniciar Demo</span>
+                <span className="text-black">{text.demo}</span>
               </div>
             </NavLink>
           </div>
@@ -47,11 +52,12 @@ export function Start() {
                   v0.1.0
                 </span>
                 <span className="text-gray-600 font-mono ml-3">
-                  // Latest release
+                  {text.latestRelease}
                 </span>
               </div>
 
-              <div className="mt-0 lg:mt-12 flex items-center space-x-6">
+            <div>
+            <div className="mt-0 lg:mt-12 flex items-center space-x-6">
                 <div className="flex -space-x-3">
                   <img
                     className="w-10 h-10 rounded-full border-2 border-void-DEFAULT"
@@ -60,9 +66,9 @@ export function Start() {
                   />
                 </div>
                 <div>
-                  <p className="text-black text-sm">Emanuel Arévalo Martínez</p>
+                  <p className="text-black text-sm">{text.member1Name}</p>
                   <div className="flex items-center space-x-4 mt-1">
-                    <span className="font-mono">Ingeniero de Software</span>
+                    <span className="font-mono">{text.member1Role}</span>
                   </div>
                 </div>
               </div>
@@ -76,12 +82,14 @@ export function Start() {
                   />
                 </div>
                 <div>
-                  <p className="text-black text-sm">Daniel Arró Moreno</p>
+                  <p className="text-black text-sm">{text.member2Name}</p>
                   <div className="flex items-center space-x-4 mt-1">
-                    <span className="font-mono">Ingeniero de Software</span>
+                    <span className="font-mono">{text.member2Role}</span>
                   </div>
                 </div>
               </div>
+            </div>
+              
             </div>
 
             <div className="lg:w-1/2 relative bg-[#181E31] rounded-xl border border-purple-800">
@@ -119,7 +127,7 @@ export function Start() {
                     </div>
 
                     <p className="text-green-400 mt-4">
-                      🚀 ¡Configuración completada!
+                      {text.completeSetup}
                     </p>
                   </div>
                 </div>

@@ -3,9 +3,14 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { HiPlusSmall } from "react-icons/hi2";
 import { IoIosKeypad } from "react-icons/io";
 import { RxTrash } from "react-icons/rx";
+import { useAppContext } from "../../../../context";
+import { textKanbanColumnGuide } from "../translate";
    
    export function KanbanColumnGuide() {
    
+     const { language } = useAppContext();
+     const text = textKanbanColumnGuide[language];
+
      const cardIds: string[] = [];
    
      const { isOver, setNodeRef } = useDroppable({
@@ -14,7 +19,6 @@ import { RxTrash } from "react-icons/rx";
    
      return (
        <div className="bg-indigo-50 rounded-2xl p-6 shadow-lg">
-         {/* DEMO VISUAL */}
          <div
            ref={setNodeRef}
            className={`
@@ -26,22 +30,21 @@ import { RxTrash } from "react-icons/rx";
              bg-gray-200 flex flex-col w-full p-4 rounded-2xl shadow-inner select-none transition
            `}
          >
-           {/* Encabezado */}
            <div className="flex justify-between items-center mb-2">
              <h2 className="text-lg font-semibold text-gray-800">
-               Nombre de la Sección
+               {text.title}
              </h2>
    
              <div className="flex gap-2 text-gray-700">
                <button
-                 title="Agregar tarjeta"
+                 title={text.addCardButton}
                  onClick={() => {}}
                >
                  <HiPlusSmall />
                </button>
    
                <button
-                 title="Eliminar columna"
+                 title={text.deleteColumnButton}
                  onClick={() => {}}
                >
                  <RxTrash />
@@ -49,12 +52,11 @@ import { RxTrash } from "react-icons/rx";
              </div>
            </div>
    
-           {/* Cards */}
            <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>
              <div className="flex flex-col gap-2 rounded-2xl">
                <div className="relative bg-white rounded-xl shadow p-4">
-                 <h3 className="font-medium text-black mb-1">Título de la tarjeta</h3>
-                 <p className="text-gray-600 text-sm">Contenido de la tarjeta</p>
+                 <h3 className="font-medium text-black mb-1">{text.cardTitle}</h3>
+                 <p className="text-gray-600 text-sm">{text.cardContent}</p>
    
                  <button className="absolute right-2 bottom-2 text-sm">
                    <RxTrash />
@@ -70,49 +72,48 @@ import { RxTrash } from "react-icons/rx";
 
          <div className="mt-10 space-y-6 border-t pt-6">
            <h2 className="text-2xl font-bold text-indigo-700">
-             Cómo usar este componente
+             {text.howToUse}
            </h2>
    
            <p className="text-gray-700">
-             <strong>KanbanColumn</strong> representa una columna de tareas dentro
-             del tablero Kanban. Recibe:
+             <strong>KanbanColumn</strong> {text.description}
            </p>
    
            <ul className="text-gray-700 list-disc pl-6">
              <li>
-               <strong>name</strong>: texto que se mostrará como título de la columna
+               <strong>name</strong>: {text.propName}
              </li>
              <li>
-               <strong>children</strong>: tarjetas (KanbanCards) dentro de esta columna
+               <strong>children</strong>: {text.propChildren}
              </li>
              <li>
-               <strong>columnIndex</strong>: identificador único para soportar drag &amp; drop
+               <strong>columnIndex</strong>: {text.propColumnIndex}
              </li>
            </ul>
    
            <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
-             <p className="text-indigo-300 mb-2">Ejemplo mínimo:</p>
+             <p className="text-indigo-300 mb-2">{text.minimalExample}</p>
              <pre className="overflow-x-auto whitespace-pre">
-   {`<KanbanColumn name="Pendiente" columnIndex="1">{children}</KanbanColumn>`}
+   {`<KanbanColumn name="Done" columnIndex="index-0">{children}</KanbanColumn>`}
              </pre>
            </div>
    
            <div className="bg-black/90 text-gray-200 p-4 rounded-lg text-sm">
-             <p className="text-indigo-300 mb-2">Ejemplo completo:</p>
+             <p className="text-indigo-300 mb-2">{text.fullExample}</p>
              <pre className="overflow-x-auto whitespace-pre">
 {`
-<KanbanColumn name="Pendiente" columnIndex="1">
+<KanbanColumn name="Pending" columnIndex="column-index-0">
   <KanbanCard
-    title="Tarea 1"
-    description="Descripción de la tarea 1"
-    columnIndex="1"
-    cardIndex="0"
+    title="Task 1"
+    description="Task description 1"
+    columnIndex="column-index-0"
+    cardIndex="card-index-0"
   />
   <KanbanCard
-    title="Tarea 2"
-    description="Descripción de la tarea 2"
-    columnIndex="1"
-    cardIndex="1"
+    title="Task 2"
+    description="Task description 2"
+    columnIndex="column-index-0"
+    cardIndex="card-index-1"
   />
 </KanbanColumn>
 `}
@@ -122,39 +123,39 @@ import { RxTrash } from "react-icons/rx";
    
          <div className="mt-10 space-y-4 border-t pt-6">
            <h2 className="text-2xl font-bold text-indigo-700">
-             Acciones disponibles
+             {text.actionsAvailable}
            </h2>
    
            <p className="text-gray-700">
-             Puedes implementar lógica para:
+             {text.actionsDescription}
            </p>
    
            <ul className="text-gray-700 list-disc pl-6">
              <li>
-               <strong>Agregar tarjetas</strong> al hacer clic en <HiPlusSmall className="inline" />
+               {text.actionAddCard} <HiPlusSmall className="inline" />
              </li>
              <li>
-               <strong>Eliminar esta columna</strong> al hacer clic en <RxTrash className="inline" />
+               {text.actionDeleteColumn} <RxTrash className="inline" />
              </li>
            </ul>
    
            <div className="bg-black/90 text-gray-200 rounded-lg p-4 text-sm">
-             <p className="text-indigo-300 mb-2">Ejemplo de lógica:</p>
+             <p className="text-indigo-300 mb-2">{text.logicExample}</p>
              <pre className="overflow-x-auto whitespace-pre">
 {`
 function handleAddCard() {
-     // tu lógica para crear una KanbanCard
+     // tyour logic to add a KanbanCard
 }
    
 function handleDeleteColumn() {
-     // tu lógica para eliminar esta KanbanColumn
+     // your logic to delete this KanbanColumn
 }
 `}
              </pre>
            </div>
    
            <p className="text-gray-500 text-sm italic">
-             Puedes conectar esta columna con estado global o API para mayor control.
+             {text.extraNote}
            </p>
          </div>
        </div>

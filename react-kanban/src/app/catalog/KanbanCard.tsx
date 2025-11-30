@@ -3,9 +3,14 @@ import { ItemBasicComponentInfo } from "./components/ItemBasicComponentInfo";
 import { ItemCodeExample } from "./components/ItemCodeExample";
 import { kanbanCardCodeExample } from "./components/kanbanCard/kanbanCardCodeExample";
 import { KanbanCardGuide } from "./components/kanbanCard/KanbanCardGuide";
+import { useAppContext } from "../../context";
+import { textKanbanCard } from "./translate";
 
 
 export function KanbanCard(){
+
+  const { language } = useAppContext();
+  const text = textKanbanCard[language];
 
   const [showCode, setShowCode] = useState(false);
   
@@ -13,8 +18,8 @@ export function KanbanCard(){
       <div className="space-y-8">
      
            <ItemBasicComponentInfo 
-             title="KanbanCard" 
-             description="Tarjeta individual que representa una tarea en el tablero" 
+             title={text.title} 
+             description={text.description} 
              showCode={showCode} 
              setShowCode={setShowCode} 
            />
