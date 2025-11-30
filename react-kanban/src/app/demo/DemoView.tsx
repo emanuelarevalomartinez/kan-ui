@@ -1,27 +1,38 @@
 import { useEffect } from "react";
-import { useAppContext } from "../../context";
+import { useAppContext, useVoice } from "../../context";
 import { KanbanBoard } from "./KanbanBoard";
 import { KanbanCard } from "./KanbanCard";
 import { KanbanColumn } from "./KanbanColumn";
-import { initDevosaurus } from 'devosaurus';
-import { checkPassword } from "unipass-validator/browser";
+import { Actions } from "devosaurus";
+import { APP_ROUTES } from "../../routes";
 
 
 export function DemoView() {
 
 const { columns } = useAppContext();
-const devo = initDevosaurus();
 
-useEffect(() => {
+const devo = useVoice();
 
-const result = checkPassword('123456');
-console.log(result);
+  useEffect(() => {
+    if (!devo) return;
 
-  devo.addCommand('greet', ['hello', 'good morning'], () => {
-    alert('Hello there! 👋');
-  });
-}, [])
+    devo.addCommand(
+      "go to catalog",
+      ["open catalog", "catalog"],
+      () => {
+        Actions.goTo(APP_ROUTES.CATALOG)();
+      }
+    );
 
+    devo.addCommand(
+      "go home",
+      ["home", "go to home", "start"],
+      () => {
+        Actions.goTo(APP_ROUTES.HOME)();
+      }
+    );
+
+  }, [devo]);
 
   return (
     <>

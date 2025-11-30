@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { useAppContext } from "../../context";
+import { useAppContext, useVoice } from "../../context";
 import { APP_ROUTES } from "../../routes";
+import { Actions } from "devosaurus";
 
 export function CatalogView() {
   const location = useLocation();
@@ -34,6 +35,30 @@ export function CatalogView() {
       mainRef.current.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [location.pathname]);
+
+  const devo = useVoice();
+  
+    useEffect(() => {
+
+      if (!devo) return;
+  
+      devo.addCommand(
+        "go to demo",
+        ["open demo", "demo"],
+        () => {
+          Actions.goTo(APP_ROUTES.DEMO)();
+        }
+      );
+
+      devo.addCommand(
+        "go home",
+        ["home", "go to home", "start"],
+        () => {
+          Actions.goTo(APP_ROUTES.HOME)();
+        }
+      );
+  
+    }, [devo]);
 
   return (
     <div className="mt-16 h-[91vh] bg-gradient-to-br from-indigo-50 to-indigo-100 relative">

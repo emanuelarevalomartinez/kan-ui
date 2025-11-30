@@ -32,6 +32,8 @@ type AppContextType = {
   showErrorMessage: boolean;
   setShowErrorMessage: (e: boolean)=> void;
   doesCardTitleExist: (e: string)=> boolean;
+  handleDeleteFirstColumn: () => void;
+  handleDeleteLastColumn: () => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -168,6 +170,20 @@ const [columns, setColumns] = useState<Column[]>(columns_data);
       updated[toColumnIndex].cards.splice(newCardIndex, 0, card);
 
       return updated;
+    });
+  }
+
+  function handleDeleteFirstColumn() {
+    setColumns((prev) => {
+      if (prev.length === 0) return prev;
+      return prev.slice(1);
+    });
+  }
+  
+  function handleDeleteLastColumn() {
+    setColumns((prev) => {
+      if (prev.length === 0) return prev;
+      return prev.slice(0, -1);
     });
   }
 
@@ -319,6 +335,8 @@ const [columns, setColumns] = useState<Column[]>(columns_data);
         showErrorMessage, 
         setShowErrorMessage,
         doesCardTitleExist,
+        handleDeleteFirstColumn,
+        handleDeleteLastColumn,
       }}
     >
       {children}

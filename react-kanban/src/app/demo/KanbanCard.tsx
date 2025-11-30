@@ -92,7 +92,7 @@ export function KanbanCard({
       <div 
       style={style}
         className={`relative bg-[#FEFEFE] rounded-2xl shadow hover:shadow-md 
-          transition-all p-4 select-none`}
+          transition-all p-4 select-none w-full md:min-w-[180px]`}
       ref={setNodeRef}
       >
         <div

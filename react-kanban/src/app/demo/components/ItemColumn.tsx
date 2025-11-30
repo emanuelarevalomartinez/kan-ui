@@ -1,15 +1,50 @@
-import type { Column } from "../../context";
+import { useEffect } from "react";
+import { useVoice } from "../../../context";
+import type { Column } from "../../../interfaces";
+import { Actions } from "devosaurus";
+
 
 interface ItemColumnProperties{
-  newColumnName: string,
+  newColumn: Column,
   setNewColumn: React.Dispatch<React.SetStateAction<Column>>;
   handleAddNewColumn: (e: string)=> void;
+  handleCloseColumnModal: ()=> void;
 }
 
 
-export function ItemColumn( { newColumnName, setNewColumn, handleAddNewColumn }: ItemColumnProperties) {
+export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handleCloseColumnModal }: ItemColumnProperties) {
 
+  const devo = useVoice();
 
+  const input = document.querySelector<HTMLInputElement>('#column-input');
+
+  let input2: string = "";
+
+  useEffect(() => {
+    if (!devo) return;
+  
+    devo.addCommand(
+      "set section name revisar",
+      ["set name"],
+      () => {
+        const value = "Tareas";
+
+        Actions.type("#column-input", value)();
+
+        setNewColumn(prev => ({ ...prev, name: value }));
+      }
+    );
+
+    devo.addCommand(
+      "confirm column",
+      ["create section"],
+      () => {
+        handleAddNewColumn("Tareas");
+        handleCloseColumnModal();
+      }
+    );
+  
+  }, [devo, setNewColumn, handleAddNewColumn]);
 
   return (
     <div
@@ -19,7 +54,8 @@ export function ItemColumn( { newColumnName, setNewColumn, handleAddNewColumn }:
         Nombre
       </label>
       <input
-      value={newColumnName}
+      id="column-input"
+      value={newColumn.name}
         onChange={(e) =>
           setNewColumn(prev => ({
             ...prev,
@@ -32,7 +68,7 @@ export function ItemColumn( { newColumnName, setNewColumn, handleAddNewColumn }:
       />
       <button
         className="w-full bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 transition"
-        onClick={ ()=> { handleAddNewColumn(newColumnName) } }
+        onClick={ ()=> { handleAddNewColumn(newColumn.name) } }
       >
         Crear Sección
       </button>

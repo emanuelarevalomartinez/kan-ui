@@ -3,8 +3,9 @@ import { Modal } from "./components/Modal";
 import { ItemColumn } from "./components/ItemColumn";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { ItemTrash } from "./components/ItemTrash";
-import { useAppContext } from "../../context";
+import { useAppContext, useVoice } from "../../context";
 import type { Column } from "../../interfaces";
+import { useEffect } from "react";
 
 
 interface Props {
@@ -14,6 +15,8 @@ interface Props {
 }
 
 export function KanbanBoard({ children, title, columns }: Props) {
+
+
   const {
     newColumn,
     setNewColumn,
@@ -27,7 +30,48 @@ export function KanbanBoard({ children, title, columns }: Props) {
     activeCard,
     setShowErrorMessage, 
     setErrorMessage,
+    handleDeleteFirstColumn,
+    handleDeleteLastColumn,
   } = useAppContext();
+
+  const devo = useVoice();
+
+  useEffect(() => {
+    if (!devo) return;
+
+    devo.addCommand(
+      "open modal new section",
+      ["add section", "add column"],
+      () => {
+        handleAddNewSection();
+      }
+    );
+
+    devo.addCommand(
+      "close modal new section",
+      ["close window"],
+      () => {
+       handleCloseColumnModal();
+      }
+    );
+
+    devo.addCommand(
+      "delete first column",
+      ["delete first column", "remove first section"],
+      () => {
+        handleDeleteFirstColumn();
+      }
+    );
+    
+    devo.addCommand(
+      "delete last column",
+      ["delete last column", "remove last section"],
+      () => {
+        handleDeleteLastColumn();
+      }
+    );
+
+  }, [devo]);
 
   function handleAddNewSection() {
     setOpenModalBoardContainer(true);
@@ -41,7 +85,7 @@ export function KanbanBoard({ children, title, columns }: Props) {
   }
 
   const columnCount = columns.length;
-  const gridCols = columnCount >= 4 ? "md:grid-cols-4" : columnCount == 3 ? "md:grid-cols-3" : columnCount == 2 ? "md:grid-cols-2" : `md:grid-cols-1`;
+  const disposition = columnCount >= 4 ? "flex flex-col md:flex-row" : columnCount == 3 ? "grid grid-cols-1 md:grid-cols-3" : columnCount == 2 ? "grid grid-cols-1 md:grid-cols-2" : `grid grid-cols-1`;
 
   return (
     <>
@@ -51,9 +95,10 @@ export function KanbanBoard({ children, title, columns }: Props) {
         title="Nueva Sección"
       >
         <ItemColumn
-          newColumnName={newColumn.name}
+          newColumn={newColumn}
           setNewColumn={setNewColumn}
           handleAddNewColumn={handleAddNewColumn}
+          handleCloseColumnModal={handleCloseColumnModal}
         />
       </Modal>
 
@@ -76,7 +121,7 @@ export function KanbanBoard({ children, title, columns }: Props) {
           </div>
 
           <div className="space-x-4 overflow-x-auto">
-            <div className={`grid w-full grid-cols-1 ${gridCols} gap-2 rounded-2xl`}>
+            <div className={`${disposition} w-full gap-2 rounded-2xl`}>
               {children}
             </div>
           </div>

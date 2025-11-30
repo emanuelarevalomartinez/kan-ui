@@ -29,12 +29,12 @@ export function KanbanColumn({ children, name, columnIndex, cardIds }: Props) {
   return (
     <div
       ref={setNodeRef}
-      className={\\\`
-        \\\${isOver ? "border-indigo-400 bg-indigo-50" :
+      className={\`
+        \${isOver ? "border-indigo-400 bg-indigo-50" :
         "border-transparent hover:border-gray-300"}
         border-2 transition-colors duration-200
         bg-gray-100 flex flex-col w-full p-4 rounded-2xl shadow-sm select-none
-      \\\`}
+      \`}
     >
       <div className="flex justify-between items-center mb-2">
         <h2 className="text-base font-semibold text-gray-800">{name}</h2>

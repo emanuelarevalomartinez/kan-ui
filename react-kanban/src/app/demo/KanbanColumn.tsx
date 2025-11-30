@@ -1,13 +1,13 @@
 import { RxTrash } from "react-icons/rx";
 import { HiPlusSmall } from "react-icons/hi2";
 import { Modal } from "./components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ItemCard } from "./components/ItemCard";
 import { ModalDelete } from "./components/ModalDelete";
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { v4 as uuidv4 } from "uuid";
-import { useAppContext } from "../../context";
+import { useAppContext, useVoice } from "../../context";
 import type { Card } from "../../interfaces";
 
 interface Props {
@@ -81,6 +81,30 @@ export function KanbanColumn({
     setErrorMessage("");
     setOpen(false);
   }
+
+  const devo = useVoice();
+  
+    useEffect(() => {
+      if (!devo) return;
+    
+      devo.addCommand(
+        "open modal new card",
+        ["add note", "add card"],
+        () => {
+          setOpen(true);
+          setDeleting(false);
+        }
+      );
+
+      devo.addCommand(
+        "close modal new section",
+        ["close window"],
+        () => {
+          HandleClosseModal();
+        }
+      );
+    
+    }, [devo]);
 
   return (
     <>
