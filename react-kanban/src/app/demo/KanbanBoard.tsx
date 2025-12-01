@@ -6,6 +6,7 @@ import { ItemTrash } from "./components/ItemTrash";
 import { useAppContext, useVoice } from "../../context";
 import type { Column } from "../../interfaces";
 import { useEffect } from "react";
+import { textModals } from "./translate";
 
 
 interface Props {
@@ -16,8 +17,8 @@ interface Props {
 
 export function KanbanBoard({ children, title, columns }: Props) {
 
-
   const {
+    language,
     newColumn,
     setNewColumn,
     handleAddNewColumn,
@@ -33,6 +34,8 @@ export function KanbanBoard({ children, title, columns }: Props) {
     handleDeleteFirstColumn,
     handleDeleteLastColumn,
   } = useAppContext();
+
+  const text = textModals[language];
 
   const devo = useVoice();
 
@@ -92,7 +95,7 @@ export function KanbanBoard({ children, title, columns }: Props) {
       <Modal
         isOpen={openModalBoardContainer}
         onClose={() => handleCloseColumnModal()}
-        title="Nueva Sección"
+        title={text.newSectionTitle}
       >
         <ItemColumn
           newColumn={newColumn}

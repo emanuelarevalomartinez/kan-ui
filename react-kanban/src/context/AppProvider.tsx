@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import type { ActiveCard, Card, Column } from "../interfaces";
 import { columns_data } from "./columns_data";
 import { getLanguageLocalStore, setLanguageLocalStore, type LANGUAGE } from "../data";
+import { textValidationMessages } from "../validations";
 
 type AppContextType = {
   language: LANGUAGE;
@@ -49,7 +50,7 @@ const [language, setLanguage] = useState<LANGUAGE>(() => {
   if(getLanguageLocalStore()){
     return getLanguageLocalStore() as LANGUAGE;
   } else {
-    
+
     const browserLang = navigator.language.startsWith("es") ? "es" : "en";
     setLanguageLocalStore(browserLang);
     return browserLang;
@@ -60,6 +61,8 @@ const changeLanguage = (lang: LANGUAGE) => {
   setLanguage(lang);
   setLanguageLocalStore(lang);
 };
+
+  const textValidation = textValidationMessages[language];
 
   const [openModalBoardContainer, setOpenModalBoardContainer] = useState(false);
   const [openModalColumnContainer, setOpenModalColumnContainer] =
@@ -85,13 +88,13 @@ const [columns, setColumns] = useState<Column[]>(columns_data);
   function handleAddNewColumn(name: string) {
     if (name === "") {
      setShowErrorMessage(true);
-     setErrorMessage("Nueva sección no puede estar vacia");
+     setErrorMessage(textValidation.columnNameEmpty);
     return;
     }
 
     if (name.length > 20) {
       setShowErrorMessage(true);
-      setErrorMessage("Nueva sección tener un nombre inferior a 20 caractéres");
+      setErrorMessage(textValidation.columnNameTooLong);
     return;
     }
 
@@ -101,7 +104,7 @@ const [columns, setColumns] = useState<Column[]>(columns_data);
 
     if (exists) {
       setShowErrorMessage(true);
-      setErrorMessage("Ya existe una sección con ese nombre");
+      setErrorMessage(textValidation.columnNameExists);
       return;
     }
 

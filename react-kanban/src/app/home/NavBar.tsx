@@ -8,13 +8,13 @@ import { HiOutlineLightBulb } from "react-icons/hi2";
 import { textNavBar } from "./translate";
 import type { JSX } from "react";
 
-interface NaveItems {
+interface NavItems {
   title: string;
   path: string;
   icon: JSX.Element;
 }
 
-const navItems: NaveItems[] = [
+const navItems: NavItems[] = [
   { title: "Catálogo", path: APP_ROUTES.CATALOG, icon: <HiOutlinePuzzle /> },
   { title: "Demo", path: APP_ROUTES.DEMO, icon: <HiOutlineLightBulb /> },
 ];
@@ -91,9 +91,9 @@ export function Navbar() {
               className="cursor-pointer rounded-lg border border-gray-300 p-1 transition-colors duration-300 hover:bg-gray-100 inline-flex items-center justify-center"
             >
               {language === "es" ? (
-                <span className="fi fi-es"></span>
-              ) : (
                 <span className="fi fi-us"></span>
+              ) : (
+                <span className="fi fi-es"></span>
               )}
             </span>
           </div>

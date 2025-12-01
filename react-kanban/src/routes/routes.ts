@@ -8,6 +8,7 @@
         CATALOG_KANBAN_CARD: "/catalog/kanban-card",
         CATALOG_ABOUT_US: "/catalog/about-us",
         DEMO: "/demo",
+        UNIPASS_VALIDADOR: "/unipass-validator",
     } as const;
     
     export type AppRoute = typeof APP_ROUTES[keyof typeof APP_ROUTES];

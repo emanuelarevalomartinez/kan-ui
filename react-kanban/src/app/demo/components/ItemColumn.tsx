@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useVoice } from "../../../context";
+import { useAppContext, useVoice } from "../../../context";
 import type { Column } from "../../../interfaces";
 import { Actions } from "devosaurus";
+import { textItemColumn } from "../translate";
 
 
 interface ItemColumnProperties{
@@ -14,11 +15,10 @@ interface ItemColumnProperties{
 
 export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handleCloseColumnModal }: ItemColumnProperties) {
 
+  const { language } = useAppContext();
+  const text = textItemColumn[language];
+
   const devo = useVoice();
-
-  const input = document.querySelector<HTMLInputElement>('#column-input');
-
-  let input2: string = "";
 
   useEffect(() => {
     if (!devo) return;
@@ -51,7 +51,7 @@ export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handl
       className="space-y-3"
     >
       <label className="text-sm font-medium text-gray-700">
-        Nombre
+        {text.titleLabel}
       </label>
       <input
       id="column-input"
@@ -62,7 +62,7 @@ export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handl
             name: e.target.value
           }))
         }
-        placeholder="Nombre"
+        placeholder={text.titlePlaceholder}
         className="w-full border border-indigo-300 rounded-lg p-2 text-gray-800 focus:outline-none focus:border-indigo-500"
         required
       />
@@ -70,7 +70,7 @@ export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handl
         className="w-full bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 transition"
         onClick={ ()=> { handleAddNewColumn(newColumn.name) } }
       >
-        Crear Sección
+        {text.buttonCreate}
       </button>
     </div>
   );

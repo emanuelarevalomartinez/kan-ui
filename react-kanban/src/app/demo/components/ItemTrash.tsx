@@ -1,11 +1,16 @@
 import { useDroppable } from "@dnd-kit/core";
 import { RxTrash } from "react-icons/rx";
+import { useAppContext } from "../../../context";
+import { textModals } from "../translate";
 
 interface ItemTrashProps {
   isDragging: boolean;
 }
 
 export function ItemTrash({ isDragging }: ItemTrashProps){
+
+  const { language } = useAppContext();
+  const text = textModals[language];
 
      const { isOver, setNodeRef } = useDroppable({
     id: 'trash',
@@ -34,7 +39,7 @@ export function ItemTrash({ isDragging }: ItemTrashProps){
       >
         <RxTrash className="w-6 h-6" />
         <span className="font-semibold">
-          {isOver ? 'Eliminar' : 'Arrastra para Eliminar'}
+          {isOver ? text.confirmDeleteButton : text.dragToDeleteHint}
         </span>
       </div>
     </div>

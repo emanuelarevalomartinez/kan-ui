@@ -7,6 +7,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import { IoIosKeypad } from "react-icons/io";
 import { useAppContext } from "../../context";
+import { textModals } from "./translate";
+import { textValidationMessages } from "../../validations";
 
 interface Props {
   title: string;
@@ -21,7 +23,10 @@ export function KanbanCard({
   columnIndex,
   cardIndex,
 }: Props) {
-  const { handleDeleteCard, handleUpdateCardDescription, setShowErrorMessage, setErrorMessage } = useAppContext();
+  const { language, handleDeleteCard, handleUpdateCardDescription, setShowErrorMessage, setErrorMessage } = useAppContext();
+
+  const text = textModals[language];
+  const textValidation = textValidationMessages[language];
 
   const [open, setOpen] = useState(false);
   const [writing, setWriting] = useState(false);
@@ -50,7 +55,7 @@ export function KanbanCard({
 
     if(tempDescription.length === 0){
       setShowErrorMessage(true);
-      setErrorMessage("La nueva descripción no puede estar vacía");
+      setErrorMessage(textValidation.descriptionEmpty);
     } else {
       
       if (writing) {
@@ -81,7 +86,7 @@ export function KanbanCard({
     <>
       <ModalDelete
         isOpen={open && !writing}
-        text="¿ Eliminar Esta Nota ?"
+        text={text.deleteNoteMessage}
         onDelete={() => HandleDeletecardItem()}
         onClose={() => setOpen(false)}
       ></ModalDelete>
@@ -92,7 +97,7 @@ export function KanbanCard({
         onClose={() => {
           handleModalClose();
         }}
-        title="Nota"
+        title={text.editNoteTitle}
       >
         <ItemWritingOnCard
           tempDescription={tempDescription}

@@ -9,6 +9,8 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { v4 as uuidv4 } from "uuid";
 import { useAppContext, useVoice } from "../../context";
 import type { Card } from "../../interfaces";
+import { textModals } from "./translate";
+import { textValidationMessages } from "../../validations";
 
 interface Props {
   name: string;
@@ -21,8 +23,13 @@ export function KanbanColumn({
   name,
   columnIndex,
 }: Props) {
-  const { handleAddNewCardOnColumn, handleDeleteColumn, columns, setShowErrorMessage, 
+  const { language, handleAddNewCardOnColumn, handleDeleteColumn, columns, setShowErrorMessage, 
     setErrorMessage, doesCardTitleExist, } = useAppContext();
+
+  const text = textModals[language];
+  const textValidation = textValidationMessages[language];
+
+
   const [open, setOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [newCard, setNewCard] = useState<Card>({
@@ -53,25 +60,25 @@ export function KanbanColumn({
   function handleAddCard() {
     if (!newCard.title.trim() && !newCard.description.trim()) {
       setShowErrorMessage(true);
-      setErrorMessage("El título y texto son obligatorio");
+      setErrorMessage(textValidation.cardTitleAndDescriptionRequired);
       return;
     }
 
     if (!newCard.title.trim()) {
       setShowErrorMessage(true);
-      setErrorMessage("El título es obligatorio");
+      setErrorMessage(textValidation.cardTitleRequired);
       return;
     }
 
     if (!newCard.description.trim()) {
       setShowErrorMessage(true);
-      setErrorMessage("La descripción es obligatoria");
+      setErrorMessage(textValidation.cardDescriptionRequired);
       return;
     }
 
     if(doesCardTitleExist(newCard.title)){
       setShowErrorMessage(true);
-      setErrorMessage("Ya existe una nota con ese nombre");
+      setErrorMessage(textValidation.cardNameExists);
       return;
     }
 
@@ -110,14 +117,14 @@ export function KanbanColumn({
     <>
       <ModalDelete
         isOpen={open && deleting}
-        text="¿ Eliminar Esta Sección ?"
+        text={text.deleteSectionMessage}
         onDelete={() => HandleDeleteColumn()}
         onClose={() => HandleClosseModal() }
       ></ModalDelete>
       <Modal
         isOpen={open && !deleting}
         onClose={() => HandleClosseModal() }
-        title="Nueva Nota"
+        title={text.newNoteTitle}
       >
         <ItemCard
           newCard={newCard}

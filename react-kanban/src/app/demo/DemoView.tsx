@@ -60,6 +60,11 @@ const devo = useVoice();
             </KanbanBoard>
           </div>
         </div>
+
+       {/*  <div>
+          Documentación
+        </div> */}
+
       </div>
     </>
   );

@@ -9,6 +9,7 @@ import {
   Requirements,
 } from "../app";
 import { DemoView } from "../app";
+import { NotFoundPage, UniPassValidatorPage } from "../extra";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,14 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/unipass-validator",
+    element: <UniPassValidatorPage />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+  }
 ]);
 
 export default router;
