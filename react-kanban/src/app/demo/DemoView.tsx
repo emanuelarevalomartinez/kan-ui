@@ -5,33 +5,26 @@ import { KanbanCard } from "./KanbanCard";
 import { KanbanColumn } from "./KanbanColumn";
 import { Actions } from "devosaurus";
 import { APP_ROUTES } from "../../routes";
-
+import { NavLink } from "react-router-dom";
+import { textDemoView } from "./translate";
 
 export function DemoView() {
+  const { language, columns } = useAppContext();
 
-const { columns } = useAppContext();
+  const text = textDemoView[language];
 
-const devo = useVoice();
+  const devo = useVoice();
 
   useEffect(() => {
     if (!devo) return;
 
-    devo.addCommand(
-      "go to catalog",
-      ["open catalog", "catalog"],
-      () => {
-        Actions.goTo(APP_ROUTES.CATALOG)();
-      }
-    );
+    devo.addCommand("go to catalog", ["open catalog", "catalog"], () => {
+      Actions.goTo(APP_ROUTES.CATALOG)();
+    });
 
-    devo.addCommand(
-      "go home",
-      ["home", "go to home", "start"],
-      () => {
-        Actions.goTo(APP_ROUTES.HOME)();
-      }
-    );
-
+    devo.addCommand("go home", ["home", "go to home", "start"], () => {
+      Actions.goTo(APP_ROUTES.HOME)();
+    });
   }, [devo]);
 
   return (
@@ -60,11 +53,14 @@ const devo = useVoice();
             </KanbanBoard>
           </div>
         </div>
-
-       {/*  <div>
-          Documentación
-        </div> */}
-
+        <div className="flex justify-center mb-4 pb-4">
+          <NavLink
+            to={APP_ROUTES.UNIPASS_VALIDADOR}
+            className="px-5 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition active:scale-95"
+          >
+            {text.buttonUnipassValidator}
+          </NavLink>
+        </div>
       </div>
     </>
   );

@@ -1,13 +1,32 @@
 import { useState } from "react";
-import { checkPassword, isInBlacklist } from "unipass-validator/browser";
+import { checkPassword } from "unipass-validator/browser";
+import { FiArrowLeft } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+
+interface PasswordAnalysis {
+  password: string;
+  score: 0 | 1 | 2 | 3 | 4;
+  crackTime: string | number;
+  suggestions: string[];
+  warnings: string;
+  blacklisted: boolean;
+}
 
 export function UniPassValidatorPage() {
-  const [password, setPassword] = useState("");
-  const [analysis, setAnalysis] = useState<any>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const navigate = useNavigate();
+
+  function handleGoBack() {
+    navigate(-1);
+  }
+
+  const [password, setPassword] = useState<string>("");
+  const [analysis, setAnalysis] = useState<PasswordAnalysis | null>(null);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     setPassword(value);
+
     if (value.trim() === "") {
       setAnalysis(null);
       return;
@@ -16,7 +35,7 @@ export function UniPassValidatorPage() {
     setAnalysis(result);
   };
 
-  const getScoreColor = (score: number) => {
+  function getScoreColor(score: number) {
     switch (score) {
       case 0: return "bg-red-500";
       case 1: return "bg-orange-400";
@@ -29,8 +48,17 @@ export function UniPassValidatorPage() {
 
   return (
     <div className="flex justify-center items-center p-6 min-h-screen bg-gradient-to-br from-indigo-50 to-indigo-100">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
-        <h2 className="text-2xl font-bold text-indigo-700 mb-4 text-center">
+      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
+
+        <button
+          onClick={() => { handleGoBack() }}
+          className="absolute top-7 left-7 text-indigo-600 hover:text-indigo-800 transition"
+          aria-label="Volver"
+        >
+          <FiArrowLeft className="w-6 h-6" />
+        </button>
+
+        <h2 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
           UniPass Validator
         </h2>
 
