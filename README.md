@@ -9,16 +9,14 @@ Kan-UI provides a set of UI-ready components that simplify the creation of custo
 This project serves as both:
 
 ✔ A component library for developers
+
 ✔ A showcasing website with built-in documentation and an interactive demo
 
 The website includes:
 
 A documentation section for components
-
 An interactive Kanban demo
-
 A password validator demo using an external security library
-
 Voice-command actions to navigate throughout the app
 
 ## ✨ Main Features
@@ -93,7 +91,9 @@ A button below the Kanban board in the /demo page allows users to jump directly 
 The following components are included and documented inside the app:
 
 ✔ KanbanBoard
+
 ✔ KanbanColumn
+
 ✔ KanbanCard
 
 Each component includes:
