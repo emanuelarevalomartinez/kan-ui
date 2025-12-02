@@ -13,7 +13,7 @@ import {
 import { ItemTrash } from "./components/ItemTrash";
 import { useAppContext, useVoice } from "../../context";
 import type { Column } from "../../interfaces";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { textModals } from "./translate";
 
 interface Props {
