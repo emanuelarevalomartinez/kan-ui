@@ -15,8 +15,11 @@ This project serves as both:
 The website includes:
 
 A documentation section for components
+
 An interactive Kanban demo
+
 A password validator demo using an external security library
+
 Voice-command actions to navigate throughout the app
 
 ## ✨ Main Features
