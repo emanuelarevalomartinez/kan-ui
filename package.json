@@ -1,11 +1,11 @@
 {
-  "name": "taskflow-kanban",
+  "name": "Kan-UI",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "description": "Library of reusable components to build Kanban boards that can be easily integrated into any React application.",
   "author": "Emanuel Arévalo Martínez",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

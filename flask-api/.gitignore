@@ -1,6 +1,0 @@
-# Ignorar entorno virtual
-venv/
-
-# Archivos de cache
-__pycache__/
-*.pyc
