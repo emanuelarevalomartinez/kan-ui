@@ -49,7 +49,7 @@ npm run dev
 
 📌 Once the development server is running, open your browser and navigate to:
 
-🔗 http://localhost:5173
+🔗 http://localhost:5173/kan-ui
 
 ➡️ This will open the Kan-UI application, where you can access the documentation and demos directly from the home screen.
 
