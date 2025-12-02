@@ -3,6 +3,7 @@ import { LuHandshake } from "react-icons/lu";
 import { TbTargetArrow } from "react-icons/tb";
 import { useAppContext } from "../../context";
 import { textAboutUs } from "./translate";
+import { IMAGE_USER_1, IMAGE_USER_2 } from "../../consts";
 
 export function AboutUs() {
 
@@ -61,8 +62,8 @@ export function AboutUs() {
             <div className="flex w-4/6 md:w-auto m-auto md:m-0 items-center space-x-4">
               <img
                 className="w-12 h-12 rounded-full"
-                src="/icons/logo.png"
-                alt="Emanuel"
+                src={IMAGE_USER_1.src}
+                alt={IMAGE_USER_1.alt}
               />
               <div className="text-left">
                 <p className="text-black text-sm font-medium">
@@ -77,8 +78,8 @@ export function AboutUs() {
             <div className="flex w-4/6 md:w-auto m-auto md:m-0 items-center space-x-4">
               <img
                 className="w-12 h-12 rounded-full"
-                src="/icons/logo_2.png"
-                alt="Daniel"
+                src={IMAGE_USER_2.src}
+                alt={IMAGE_USER_2.alt}
               />
               <div className="text-left">
                 <p className="text-black text-sm font-medium">

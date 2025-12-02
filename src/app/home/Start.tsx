@@ -4,6 +4,7 @@ import { TypeAnimation } from "react-type-animation";
 import { APP_ROUTES } from "../../routes";
 import { useAppContext } from "../../context";
 import { textStart } from "./translate";
+import { IMAGE_LINES_1, IMAGE_LINES_2, IMAGE_USER_1, IMAGE_USER_2 } from "../../consts";
 
 export function Start() {
 
@@ -61,8 +62,8 @@ export function Start() {
                 <div className="flex -space-x-3">
                   <img
                     className="w-10 h-10 rounded-full border-2 border-void-DEFAULT"
-                    src="/icons/logo.png"
-                    alt="User"
+                    src={IMAGE_USER_1.src}
+                    alt={IMAGE_USER_1.alt}
                   />
                 </div>
                 <div>
@@ -77,8 +78,8 @@ export function Start() {
                 <div className="flex -space-x-3">
                   <img
                     className="w-10 h-10 rounded-full border-2 border-void-DEFAULT"
-                    src="/icons/logo_2.png"
-                    alt="User"
+                    src={IMAGE_USER_2.src}
+                    alt={IMAGE_USER_2.alt}
                   />
                 </div>
                 <div>
@@ -139,13 +140,13 @@ export function Start() {
         </section>
       </div>
       <img
-        src="/svgs/lines_1.svg"
-        alt=""
+        src={IMAGE_LINES_1.src}
+        alt={IMAGE_LINES_1.alt}
         className="absolute bottom-0 left-0 right-auto top-auto -z-10 opacity-25 lg:opacity-100 inline-block"
       />
       <img
-        src="/svgs/lines_2.svg"
-        alt=""
+        src={IMAGE_LINES_2.src}
+        alt={IMAGE_LINES_2.alt}
         className="absolute bottom-auto left-auto right-0 top-[10%] -z-10 opacity-25 lg:opacity-100 inline-block"
       />
     </div>

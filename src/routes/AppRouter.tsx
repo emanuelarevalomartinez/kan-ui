@@ -64,6 +64,10 @@ const router = createBrowserRouter([
     path: "*",
     element: <NotFoundPage />,
   }
-]);
+],
+{
+  basename: "/kan-ui",
+}
+);
 
 export default router;
