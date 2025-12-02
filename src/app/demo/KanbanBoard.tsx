@@ -1,13 +1,20 @@
 import { TbNewSection } from "react-icons/tb";
 import { Modal } from "./components/Modal";
 import { ItemColumn } from "./components/ItemColumn";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { ItemTrash } from "./components/ItemTrash";
 import { useAppContext, useVoice } from "../../context";
 import type { Column } from "../../interfaces";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { textModals } from "./translate";
-
 
 interface Props {
   title: string;
@@ -16,7 +23,6 @@ interface Props {
 }
 
 export function KanbanBoard({ children, title, columns }: Props) {
-
   const {
     language,
     newColumn,
@@ -29,7 +35,7 @@ export function KanbanBoard({ children, title, columns }: Props) {
     handleDragEnd,
     handleDragCancel,
     activeCard,
-    setShowErrorMessage, 
+    setShowErrorMessage,
     setErrorMessage,
     handleDeleteFirstColumn,
     handleDeleteLastColumn,
@@ -50,13 +56,9 @@ export function KanbanBoard({ children, title, columns }: Props) {
       }
     );
 
-    devo.addCommand(
-      "close modal new section",
-      ["close window"],
-      () => {
-       handleCloseColumnModal();
-      }
-    );
+    devo.addCommand("close modal new section", ["close window"], () => {
+      handleCloseColumnModal();
+    });
 
     devo.addCommand(
       "delete first column",
@@ -65,7 +67,7 @@ export function KanbanBoard({ children, title, columns }: Props) {
         handleDeleteFirstColumn();
       }
     );
-    
+
     devo.addCommand(
       "delete last column",
       ["delete last column", "remove last section"],
@@ -73,8 +75,18 @@ export function KanbanBoard({ children, title, columns }: Props) {
         handleDeleteLastColumn();
       }
     );
-
   }, [devo]);
+
+  const mouseSensor = useSensor(MouseSensor);
+  const keyboardSensor = useSensor(KeyboardSensor);
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 150,
+      tolerance: 10,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor, keyboardSensor, touchSensor);
 
   function handleAddNewSection() {
     setOpenModalBoardContainer(true);
@@ -88,7 +100,14 @@ export function KanbanBoard({ children, title, columns }: Props) {
   }
 
   const columnCount = columns.length;
-  const disposition = columnCount >= 4 ? "flex flex-col md:flex-row" : columnCount == 3 ? "grid grid-cols-1 md:grid-cols-3" : columnCount == 2 ? "grid grid-cols-1 md:grid-cols-2" : `grid grid-cols-1`;
+  const disposition =
+    columnCount >= 4
+      ? "flex flex-col md:flex-row"
+      : columnCount == 3
+      ? "grid grid-cols-1 md:grid-cols-3"
+      : columnCount == 2
+      ? "grid grid-cols-1 md:grid-cols-2"
+      : `grid grid-cols-1`;
 
   return (
     <>
@@ -106,6 +125,7 @@ export function KanbanBoard({ children, title, columns }: Props) {
       </Modal>
 
       <DndContext
+        sensors={sensors}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}

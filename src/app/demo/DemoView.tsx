@@ -53,7 +53,7 @@ export function DemoView() {
             </KanbanBoard>
           </div>
         </div>
-        <div className="flex justify-center mb-4 pb-4">
+        <div className="flex justify-center mt-4 mb-4 pb-16">
           <NavLink
             to={APP_ROUTES.UNIPASS_VALIDADOR}
             className="px-5 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition active:scale-95"
