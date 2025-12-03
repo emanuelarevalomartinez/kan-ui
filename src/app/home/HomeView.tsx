@@ -14,7 +14,7 @@ export function HomeView() {
   
       devo.addCommand(
         "go to catalog",
-        ["open catalog", "catalog"],
+        ["go catalog", "catalog"],
         () => {
           Actions.goTo(APP_ROUTES.CATALOG)();
         }
@@ -22,7 +22,7 @@ export function HomeView() {
   
       devo.addCommand(
         "go to demo",
-        ["open demo", "demo"],
+        ["go demo", "demo"],
         () => {
           Actions.goTo(APP_ROUTES.DEMO)();
         }

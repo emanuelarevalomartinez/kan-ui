@@ -24,10 +24,10 @@ export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handl
     if (!devo) return;
   
     devo.addCommand(
-      "set section name revisar",
-      ["set name"],
+      "set section modal info",
+      ["set section", "set column"],
       () => {
-        const value = "Tareas";
+        const value = "Pendientes";
 
         Actions.type("#column-input", value)();
 
@@ -36,8 +36,8 @@ export function ItemColumn( { newColumn, setNewColumn, handleAddNewColumn, handl
     );
 
     devo.addCommand(
-      "confirm column",
-      ["create section"],
+      "confirm create new section",
+      ["create section", "create column"],
       () => {
         handleAddNewColumn("Tareas");
         handleCloseColumnModal();

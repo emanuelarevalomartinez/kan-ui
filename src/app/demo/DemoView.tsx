@@ -18,11 +18,11 @@ export function DemoView() {
   useEffect(() => {
     if (!devo) return;
 
-    devo.addCommand("go to catalog", ["open catalog", "catalog"], () => {
+    devo.addCommand("go to catalog", ["go catalog", "catalog"], () => {
       Actions.goTo(APP_ROUTES.CATALOG)();
     });
 
-    devo.addCommand("go home", ["home", "go to home", "start"], () => {
+    devo.addCommand("go home", ["home", "go home", "start"], () => {
       Actions.goTo(APP_ROUTES.HOME)();
     });
   }, [devo]);

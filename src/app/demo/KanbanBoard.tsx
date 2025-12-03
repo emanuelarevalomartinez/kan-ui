@@ -49,28 +49,30 @@ export function KanbanBoard({ children, title, columns }: Props) {
     if (!devo) return;
 
     devo.addCommand(
-      "open modal new section",
+      "open modal for new section",
       ["add section", "add column"],
       () => {
         handleAddNewSection();
       }
     );
 
-    devo.addCommand("close modal new section", ["close window"], () => {
+    devo.addCommand("close modal of new section", 
+      ["close window"], 
+      () => {
       handleCloseColumnModal();
     });
 
     devo.addCommand(
-      "delete first column",
-      ["delete first column", "remove first section"],
+      "delete first section",
+      ["remove first section", "delete first column", "remove first section", "delete first column"],
       () => {
         handleDeleteFirstColumn();
       }
     );
 
     devo.addCommand(
-      "delete last column",
-      ["delete last column", "remove last section"],
+      "delete last section",
+      ["remove last section", "delete last column", "remove last section", "delete last column"],
       () => {
         handleDeleteLastColumn();
       }

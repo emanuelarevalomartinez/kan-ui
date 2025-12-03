@@ -95,7 +95,7 @@ export function KanbanColumn({
       if (!devo) return;
     
       devo.addCommand(
-        "open modal new card",
+        "open modal for new card",
         ["add note", "add card"],
         () => {
           setOpen(true);
@@ -104,12 +104,12 @@ export function KanbanColumn({
       );
 
       devo.addCommand(
-        "close modal new section",
+        "close window of new section",
         ["close window"],
         () => {
           HandleClosseModal();
         }
-      );
+     );
     
     }, [devo]);
 
@@ -129,7 +129,8 @@ export function KanbanColumn({
         <ItemCard
           newCard={newCard}
           setNewCard={setNewCard}
-          handleAddCard={handleAddCard}
+          handleAddCard={ ()=> { handleAddCard() } }
+          HandleClosseModal={HandleClosseModal}
         />
       </Modal>
       <div
