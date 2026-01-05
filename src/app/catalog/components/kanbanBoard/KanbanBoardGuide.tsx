@@ -39,7 +39,7 @@ const text = textKanbanBoardGuide[language];
             <strong>KanbanBoard</strong> {text.whatIs}
           </p>
 
-          <ul className="text-gray-700 space-y-2 text-sm">
+          <ul className="text-gray-700 list-disc pl-6">
             <li>
               <strong>title</strong>: {text.propTitle}
             </li>
