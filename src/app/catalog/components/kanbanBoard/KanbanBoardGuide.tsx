@@ -41,10 +41,10 @@ const text = textKanbanBoardGuide[language];
 
           <ul className="text-gray-700 space-y-2 text-sm">
             <li>
-              🔹 <strong>title</strong>: {text.propTitle}
+              <strong>title</strong>: {text.propTitle}
             </li>
             <li>
-              🔹 <strong>children</strong>: {text.propChildren}
+              <strong>children</strong>: {text.propChildren}
             </li>
           </ul>
 
